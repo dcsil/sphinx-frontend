@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { FlaskTestButton } from './components/dummy/flask';
 
 function App() {

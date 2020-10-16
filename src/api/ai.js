@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { AI_URL } from '../endpoints';
 
-const AI_URL = 'https://sphinx-model.herokuapp.com';
 const defaultConfig = {
   timeout: 5000,
 };

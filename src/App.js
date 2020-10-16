@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FlaskTestButton } from './components/dummy/flask';
 
 function App() {
-  console.log(process.env.NODE_ENV);
   return (
     <div className="App">
       <header className="App-header">

@@ -3,7 +3,7 @@
 const NODE_SERVER =
   process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
     ? 'http://localhost:5000'
-    : '';
+    : 'https://sphinx-node.herokuapp.com';
 const AI_URL = 'https://sphinx-model.herokuapp.com';
 
 export { NODE_SERVER, AI_URL };

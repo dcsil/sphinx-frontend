@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Exit if any subcommand fails
+set -e
+
+su -c 'apt update'
+
+su -c 'apt install -y curl'
+
+su -c 'curl -sL https://deb.nodesource.com/setup_14.x | bash -'
+
+su -c 'apt update'
+
+su -c 'apt install -y nodejs'
+
+echo "=====================> Installing npm dependencies <====================="
+npm install

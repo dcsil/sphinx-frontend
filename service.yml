@@ -1,0 +1,14 @@
+tools:
+    exceptions: https://sentry.io/settings/university-of-toronto-1rg/projects/express
+    frontend-ci: https://github.com/dcsil/sphinx-frontend/blob/main/.github/workflows/node.js.yml
+    backend-ci: https://github.com/dcsil/sphinx-backend/blob/main/.github/workflows/node.js.yml
+  
+  services:
+    production: https://dashboard.heroku.com/apps/sphinx-node
+  
+  docs:
+    getting_started: ./README.md
+    
+  commands:
+    bootstrap: script/bootstrap
+    server: npm run start

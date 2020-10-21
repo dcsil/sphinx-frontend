@@ -12,3 +12,4 @@ tools:
   commands:
     bootstrap: script/bootstrap
     server: npm run start
+    test: npm run test

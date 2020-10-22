@@ -4,7 +4,7 @@ tools:
     backend-ci: https://github.com/dcsil/sphinx-backend/blob/main/.github/workflows/node.js.yml
   
   services:
-    production: https://dashboard.heroku.com/apps/sphinx-node
+    production: https://dashboard.heroku.com/apps/sphinx-tool
   
   docs:
     getting_started: ./README.md

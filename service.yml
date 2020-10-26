@@ -3,13 +3,13 @@ tools:
     frontend-ci: https://github.com/dcsil/sphinx-frontend/blob/main/.github/workflows/node.js.yml
     backend-ci: https://github.com/dcsil/sphinx-backend/blob/main/.github/workflows/node.js.yml
   
-  services:
+services:
     production: https://dashboard.heroku.com/apps/sphinx-tool
-  
-  docs:
+
+docs:
     getting_started: ./README.md
-    
-  commands:
+
+commands:
     bootstrap: script/bootstrap
     server: npm run start
     test: npm run test

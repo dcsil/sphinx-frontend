@@ -1,5 +1,6 @@
 tools:
     exceptions: https://sentry.io/organizations/dcsil/issues/?project=5480347
+    loggin: ''
     ci: https://github.com/dcsil/sphinx-frontend/blob/main/.github/workflows/node.js.yml
   
 services:
@@ -9,6 +10,7 @@ docs:
     getting_started: ./README.md
 
 commands:
-    bootstrap: script/bootstrap
+    bootstrap: chmod 700 script/bootstrap; script/bootstrap
+    database: ''
     server: npm run start
     test: npm run test

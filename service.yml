@@ -1,6 +1,6 @@
 tools:
     exceptions: https://sentry.io/organizations/dcsil/issues/?project=5480347
-    loggin: ''
+    logging: ''
     ci: https://github.com/dcsil/sphinx-frontend/blob/main/.github/workflows/node.js.yml
   
 services:

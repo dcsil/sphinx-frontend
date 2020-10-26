@@ -37,7 +37,7 @@ if [ "$(uname)" == "Darwin" ]; then
         install_node
     fi
       
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+else
 
     su -c 'apt update'
 

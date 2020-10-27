@@ -1,19 +1,33 @@
-#!/bin/sh
+#!/bin/bash
 
 # Exit if any subcommand fails
+
 set -e
 
 install_homebrew() {
-  if [ "$(uname)" == "Darwin" ]; then
+  if [[ "$(uname -s)" = "Darwin" ]]; then
     echo "Installing Homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
 
+install_postgres() {
+  if [[ "$(uname -s)" = "Darwin" ]]; then
+    brew cask install postgres
+  else
+    command -v psql > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+      echo "postgres already installed"
+    else
+      sudo apt-get update
+      sudo apt install postgresql postgresql-contrib
+    fi
+  fi
+}
 
 install_node() {
   echo "Installing Node"
-  if [ "$(uname)" == "Darwin" ]; then
+  if [[ "$(uname -s)" = "Darwin" ]]; then
     brew install node
   else
     sudo apt-get update
@@ -22,7 +36,7 @@ install_node() {
 }
 
 
-if [ "$(uname)" == "Darwin" ]; then
+if [[ "$(uname -s)" = "Darwin" ]]; then
     command -v brew > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "Homebrew already installed"
@@ -39,17 +53,7 @@ if [ "$(uname)" == "Darwin" ]; then
       
 else
 
-    su -c 'apt update'
-
-    su -c 'apt install -y curl'
-
-    su -c 'curl -sL https://deb.nodesource.com/setup_14.x | bash -'
-
-    su -c 'apt update'
-
-    su -c 'apt install -y nodejs'
-
-    cd backend
+    install_node
 
     echo "==> Installing client npm dependencies…"
     npm install

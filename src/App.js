@@ -1,16 +1,33 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FlaskTestButton } from './components/dummy/flask';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { FlaskTestButton } from './components/flask';
+import Navbar from './components/Navbar';
+import PrivateRoute from './components/PrivateRoute';
+import { Login } from './LoginPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <Router>
+      <Navbar />
+
+      {/* <header className="App-header">
         <img src={require('./image/sphinx_icon.png')} className="App-logo" alt="logo" />
         <FlaskTestButton />
-      </header>
-    </div>
+      </header> */}
+
+      <Switch>
+        <Route exact path="/"></Route>
+        <Route exact path="/public"></Route>
+        <PrivateRoute exact path="/private" component={FlaskTestButton} />
+        <Route exact path="/login">
+          <Login />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

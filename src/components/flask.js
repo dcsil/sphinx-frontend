@@ -1,5 +1,5 @@
 import React from 'react';
-import * as AI from '../../api/ai';
+import * as AI from '../api/ai';
 import { Button } from 'react-bootstrap';
 
 export class FlaskTestButton extends React.Component {

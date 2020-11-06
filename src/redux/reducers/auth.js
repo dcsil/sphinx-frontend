@@ -3,7 +3,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_OUT } from '../actio
 const isUser = localStorage.getItem('user');
 const initialState = isUser ? { userToken: isUser } : { userToken: null };
 
-export default function (state = initialState, action) {
+const auth = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return { requesting: true, error: null };
@@ -24,4 +24,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default auth;

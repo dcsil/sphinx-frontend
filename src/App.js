@@ -2,14 +2,7 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  useHistory,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { FlaskTestButton } from './components/flask';
 import Navbar from './components/Navbar';

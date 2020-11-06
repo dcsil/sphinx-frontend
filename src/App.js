@@ -2,7 +2,15 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Route, Switch, Link, useHistory, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  useHistory,
+  Redirect,
+} from 'react-router-dom';
+
 import { FlaskTestButton } from './components/flask';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -10,7 +18,7 @@ import { Login } from './LoginPage';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <Navbar />
 
       {/* <header className="App-header">
@@ -26,7 +34,7 @@ function App() {
           <Login />
         </Route>
       </Switch>
-    </div>
+    </Router>
   );
 }
 

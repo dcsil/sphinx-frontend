@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NODE_SERVER } from '../endpoints';
+import { NODE_SERVER } from '../utils/endpoints';
 
 describe('API test suite', () => {
   it('Test `/test` route', async () => {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AI_URL } from '../endpoints';
+import { AI_URL } from '../utils/endpoints';
 
 const defaultConfig = {
   timeout: 5000,

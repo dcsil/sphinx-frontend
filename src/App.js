@@ -1,33 +1,42 @@
 import React from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Dummy from './Dummy';
+import Landing from './LandingPage';
 
-import { FlaskTestButton } from './components/flask';
-import Navbar from './components/Navbar';
-import PrivateRoute from './components/PrivateRoute';
-import { Login } from './LoginPage';
+import Login from './LoginPage';
+import TestComp from './TestComp';
+import { history } from './utils/history';
+
+import { CSSReset, ThemeProvider } from '@chakra-ui/core';
+import customTheme from './utils/theme';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
+    <ThemeProvider theme={customTheme}>
+      <CSSReset />
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
 
-      {/* <header className="App-header">
-        <img src={require('./image/sphinx_icon.png')} className="App-logo" alt="logo" />
-        <FlaskTestButton />
-      </header> */}
-
-      <Switch>
-        <Route exact path="/"></Route>
-        <Route exact path="/public"></Route>
-        <PrivateRoute exact path="/private" component={FlaskTestButton} />
-        <Route exact path="/login">
-          <Login />
-        </Route>
-      </Switch>
-    </Router>
+          <Route
+            path="/dashboard"
+            render={({ match: { url } }) => (
+              <>
+                <Route path={`${url}/`} component={TestComp} exact />
+                <Route path={`${url}/test`} component={TestComp} exact />
+                <Route path={`${url}/dummy`} component={Dummy} />
+              </>
+            )}
+          />
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 }
 

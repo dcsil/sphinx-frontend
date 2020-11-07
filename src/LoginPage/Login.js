@@ -58,6 +58,4 @@ const actionCreator = {
   login: auth.login,
 };
 
-const connectedLogin = connect(null, actionCreator)(Login);
-
-export default connectedLogin;
+export default connect(null, actionCreator)(Login);

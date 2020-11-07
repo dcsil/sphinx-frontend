@@ -1,10 +1,6 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actionTypes';
-
-import { NODE_SERVER } from '../../endpoints';
-
-import { history } from '../../history';
-
 import axios from 'axios';
+import { NODE_SERVER } from '../../utils/endpoints';
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from '../actionTypes';
 
 function login(payload) {
   return dispatch => {
@@ -19,7 +15,7 @@ function login(payload) {
           payload: token,
         });
 
-        history.push('/private');
+        // history.push('/dashboard');
       },
       error => {
         dispatch({

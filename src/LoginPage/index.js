@@ -63,7 +63,16 @@ function Login({ login, requesting, isLoggedIn }) {
             />
             <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
           </FormControl>
-          <Button mt={4} variantColor="teal" isLoading={requesting} type="submit">
+          <Button
+            mt={4}
+            color={['primary.500', 'primary.500', 'white', 'white']}
+            bg={['white', 'white', 'primary.500', 'primary.500']}
+            _hover={{
+              bg: ['primary.100', 'primary.100', 'primary.600', 'primary.600'],
+            }}
+            isLoading={requesting}
+            type="submit"
+          >
             Submit
           </Button>
         </form>

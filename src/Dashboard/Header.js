@@ -3,6 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../LandingPage/Logo';
 // import theme from '../../utils/theme';
+import { auth } from '../redux/actions/auth';
+import { connect } from 'react-redux';
 
 const MenuItems = props => {
   const { children, isLast, to = '/', ...rest } = props;
@@ -82,6 +84,9 @@ const Header = props => {
               _hover={{
                 bg: ['primary.100', 'primary.100', 'primary.600', 'primary.600'],
               }}
+              onClick={() => {
+                props.logout();
+              }}
             >
               Logout
             </Button>
@@ -92,4 +97,8 @@ const Header = props => {
   );
 };
 
-export default Header;
+const actionCreator = {
+  logout: auth.logout,
+};
+
+export default connect(null, actionCreator)(Header);

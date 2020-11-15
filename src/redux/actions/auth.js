@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { NODE_SERVER } from '../../utils/endpoints';
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from '../actionTypes';
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_OUT } from '../actionTypes';
 
 function login(payload) {
   return dispatch => {
@@ -27,6 +27,11 @@ function login(payload) {
   };
 }
 
+const logout = () => dispatch => {
+  dispatch({ type: LOGIN_OUT });
+};
+
 export const auth = {
   login,
+  logout,
 };

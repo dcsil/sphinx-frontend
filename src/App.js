@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Dummy from './Dummy';
+// import Dummy from './Dummy';
 import Landing from './LandingPage';
+import PrivateComponent from './components/PrivateComponent';
+import Dashboard from './Dashboard';
 
 import Login from './LoginPage';
 import TestComp from './TestComp';
@@ -23,14 +25,43 @@ function App() {
           <Route exact path="/login">
             <Login />
           </Route>
+          <Route exact path="/pricing">
+            <Landing />
+          </Route>
+          <Route exact path="/features">
+            <Landing />
+          </Route>
+          <Route exact path="/how">
+            <Landing />
+          </Route>
 
           <Route
             path="/dashboard"
             render={({ match: { url } }) => (
               <>
+                <PrivateComponent component={Dashboard} />
                 <Route path={`${url}/`} component={TestComp} exact />
-                <Route path={`${url}/test`} component={TestComp} exact />
-                <Route path={`${url}/dummy`} component={Dummy} />
+                <Route
+                  exact
+                  path={`${url}/event_log`}
+                  render={props => (
+                    <PrivateComponent {...props} component={TestComp}></PrivateComponent>
+                  )}
+                />
+                <Route
+                  exact
+                  path={`${url}/anomaly`}
+                  render={props => (
+                    <PrivateComponent {...props} component={TestComp}></PrivateComponent>
+                  )}
+                />
+                <Route
+                  exact
+                  path={`${url}/diagram`}
+                  render={props => (
+                    <PrivateComponent {...props} component={TestComp}></PrivateComponent>
+                  )}
+                />
               </>
             )}
           />

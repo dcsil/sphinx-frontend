@@ -72,9 +72,9 @@ const Header = props => {
         >
           <MenuItems to="/">Home</MenuItems>
           <MenuItems to="/how">How It works </MenuItems>
-          <MenuItems to="/faetures">Features </MenuItems>
+          <MenuItems to="/features">Features </MenuItems>
           <MenuItems to="/pricing">Pricing </MenuItems>
-          <MenuItems to="/login" isLast>
+          <MenuItems to="/dashboard" isLast>
             <Button
               size="sm"
               rounded="md"

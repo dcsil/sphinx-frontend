@@ -15,6 +15,7 @@ const MenuItems = props => {
       display="block"
       {...rest}
       color={active ? 'primary.600' : 'primary.700'}
+      fontWeight={active ? '500' : 'normal'}
       padding={2}
       borderBottomWidth={active ? 2 : 0}
       onClick={onClick}

@@ -5,7 +5,7 @@ import Header from './Header';
 
 export default function DashboardLayout(props) {
   return (
-    <Flex direction="column" align="center" maxW={{ xl: '1200px' }} m="0 auto" {...props}>
+    <Flex direction="column" align="center" w="100%" m="0 auto" {...props}>
       <Header />
       {props.children}
       {/* <Footer /> */}

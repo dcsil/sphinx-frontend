@@ -3,6 +3,9 @@ import uuid from 'react-uuid';
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+function getRandomBool() {
+  return Math.random(1) > Math.random(100);
+}
 
 export default class Traffic {
   constructor(
@@ -22,21 +25,21 @@ export default class Traffic {
     ResponseTimeTimeMean,
     DoH
   ) {
-    (this.id = id),
-      (this.SourceIP = SourceIP),
-      (this.DestinationIP = DestinationIP),
-      (this.SourcePort = SourcePort),
-      (this.DestinationPort = DestinationPort),
-      (this.TimeStamp = TimeStamp),
-      (this.Duration = Duration),
-      (this.FlowBytesSent = FlowBytesSent),
-      (this.FlowSentRate = FlowSentRate),
-      (this.FlowBytesReceived = FlowBytesReceived),
-      (this.FlowReceivedRate = FlowReceivedRate),
-      (this.PacketLengthMean = PacketLengthMean),
-      (this.PacketTimeMean = PacketTimeMean),
-      (this.ResponseTimeTimeMean = ResponseTimeTimeMean),
-      (this.DoH = DoH);
+    this.id = id;
+    this.SourceIP = SourceIP;
+    this.DestinationIP = DestinationIP;
+    this.SourcePort = SourcePort;
+    this.DestinationPort = DestinationPort;
+    this.TimeStamp = TimeStamp;
+    this.Duration = Duration;
+    this.FlowBytesSent = FlowBytesSent;
+    this.FlowSentRate = FlowSentRate;
+    this.FlowBytesReceived = FlowBytesReceived;
+    this.FlowReceivedRate = FlowReceivedRate;
+    this.PacketLengthMean = PacketLengthMean;
+    this.PacketTimeMean = PacketTimeMean;
+    this.ResponseTimeTimeMean = ResponseTimeTimeMean;
+    this.DoH = DoH;
   }
 
   static fromResponseBody(object) {
@@ -75,7 +78,7 @@ export default class Traffic {
       getRandomInt(999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
-      getRandomInt(1) == 1
+      getRandomBool()
     );
   }
 

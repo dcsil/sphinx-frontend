@@ -1,0 +1,1 @@
+export const GENERATE_RANDOM = 'GENERATE_RANDOM';

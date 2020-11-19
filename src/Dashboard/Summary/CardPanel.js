@@ -1,31 +1,38 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import './styles.css';
 
 var Chart = require('chart.js');
+const NUM_PT = 20;
 
 class CardPanel extends React.Component {
   constructor(props) {
     super(props);
+    var len = this.props.traffic.logs.length;
+    var attr = this.props.traffic.logs.map(d => d[this.props.attribute]);
     this.title = props.title;
     this.line_col = props.color || '#9ecaff';
     this.chartRef = React.createRef();
     this.data = {
-      labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+      labels: [...Array(NUM_PT).keys()],
       datasets: [
         {
-          data: [896, 914, 1060, 1016, 107, 111, 133, 22221, 783, 1478],
-          backgroundColor: 'transparent',
+          data: attr.slice(Math.max(0, len - NUM_PT), len),
+          backgroundColor: this.line_col + '20',
           borderColor: this.line_col,
           pointBorderColor: 'transparent',
           pointBackgroundColor: 'transparent',
-          borderWidth: 2,
+          borderWidth: 1,
           pointBorderWidth: 0,
           lineTension: 0.1,
         },
       ],
     };
     this.options = {
+      tooltips: {
+        enabled: false,
+      },
       responsive: true,
       title: {
         display: false,
@@ -62,7 +69,24 @@ class CardPanel extends React.Component {
     };
   }
 
+  addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach(dataset => {
+      dataset.data.push(data);
+    });
+    chart.update();
+  }
+
+  updateData() {
+    var len = this.props.traffic.logs.length;
+    var data = this.props.traffic.logs.map(d => d[this.props.attribute]);
+    this.chart.data.labels = [...Array(NUM_PT).keys()];
+    this.chart.data.datasets[0].data = data.slice(Math.max(0, len - NUM_PT), len);
+    this.chart.update();
+  }
+
   componentDidMount() {
+    // this.updateData();
     this.chart = new Chart(this.chartRef.current, {
       type: 'line',
       data: this.data,
@@ -70,7 +94,19 @@ class CardPanel extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    this.updateData();
+    // console.log()
+    // this.setState({
+    //   data: this.props.data,
+    // });
+  }
+
   render() {
+    var len = this.data.datasets[0].data.length;
+    var percent =
+      (this.data.datasets[0].data[len - 1] - this.data.datasets[0].data[len - 2]) /
+      this.data.datasets[0].data[len - 2];
     return (
       <Paper
         elevation={this.state.elevate}
@@ -82,6 +118,7 @@ class CardPanel extends React.Component {
           marginLeft: 0,
           backgroundColor: this.state.bgc,
         }}
+        onClick={this.props.onClick}
         onMouseOver={() => this.setState({ bgc: '#9ecaff20', elevate: 5 })}
         onMouseLeave={() => this.setState({ bgc: 'white', elevate: 2 })}
       >
@@ -93,20 +130,33 @@ class CardPanel extends React.Component {
             alignItems: 'flex-start',
           }}
         >
-          <text style={{ marginBottom: 10, marginLeft: 10, fontWeight: '700' }}>{this.title}</text>
+          <span style={{ marginBottom: 10, marginLeft: 10, fontWeight: '700' }}>{this.title}</span>
           <div>
-            <text style={{ marginBottom: 10, marginLeft: 10, fontSize: 30 }}>10000</text>
-            <text style={{ marginBottom: 10, marginLeft: 10, fontSize: 30, color: 'green' }}>
-              10%
-            </text>
+            <span style={{ marginBottom: 10, marginLeft: 10, fontSize: 30 }}>
+              {this.data.datasets[0].data[len - 1]}
+            </span>
+            <span
+              style={{
+                marginBottom: 10,
+                marginLeft: 10,
+                fontSize: 30,
+                color: percent >= 0 ? 'green' : 'red',
+              }}
+            >
+              {Math.round(percent * 1000) / 10}%
+            </span>
           </div>
 
-          <canvas ref={this.chartRef} className="cardPanel" height="100%" />
+          <canvas ref={this.chartRef} className="cardPanel" height="70%" />
         </div>
       </Paper>
     );
   }
 }
 
-// var ctx = document.getElementById('myChart');
-export default CardPanel;
+function mapStateToProps(state, ownProps) {
+  return {
+    traffic: state.traffic,
+  };
+}
+export default connect(mapStateToProps)(CardPanel);

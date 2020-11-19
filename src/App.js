@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import Landing from './LandingPage';
 import PrivateComponent from './components/PrivateComponent';
 import Dashboard from './Dashboard';
@@ -11,8 +11,14 @@ import Login from './LoginPage';
 import { history } from './utils/history';
 import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 import customTheme from './utils/theme';
+import { traffic } from './redux/actions/traffic.js';
+import { connect } from 'react-redux';
 
-function App() {
+function App({ random }) {
+  setInterval(() => {
+    random();
+    console.log('new traffic');
+  }, 5000);
   return (
     <ThemeProvider theme={customTheme}>
       <CSSReset />
@@ -70,4 +76,8 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+const random = {
+  random: traffic.random,
+};
+export default connect(null, random)(App);

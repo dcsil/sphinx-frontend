@@ -1,1 +1,2 @@
 export const GENERATE_RANDOM = 'GENERATE_RANDOM';
+export const UPDATE_LABEL = 'UPDATE_LABEL';

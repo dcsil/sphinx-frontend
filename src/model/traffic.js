@@ -1,11 +1,30 @@
 import uuid from 'react-uuid';
+// import { traffic } from '../redux/actions/traffic';
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 function getRandomBool() {
-  return Math.random(1) > Math.random(100);
+  return getRandomInt(10) > getRandomInt(100);
 }
+function getRandomIP() {
+  var ip =
+    getRandomInt(200).toString() +
+    '.' +
+    getRandomInt(10).toString() +
+    '.' +
+    getRandomInt(10).toString() +
+    '.' +
+    getRandomInt(10).toString();
+  return ip;
+}
+
+export const LABELS = {
+  MALICIOUS: 'MALICIOUS',
+  BENIGN: 'BENIGN',
+  UNKNOWN: 'UNKNOWN',
+  FALSE: 'FALSE_POSITIVE',
+};
 
 export default class Traffic {
   constructor(
@@ -23,7 +42,8 @@ export default class Traffic {
     PacketLengthMean,
     PacketTimeMean,
     ResponseTimeTimeMean,
-    DoH
+    DoH,
+    label
   ) {
     this.id = id;
     this.SourceIP = SourceIP;
@@ -40,6 +60,7 @@ export default class Traffic {
     this.PacketTimeMean = PacketTimeMean;
     this.ResponseTimeTimeMean = ResponseTimeTimeMean;
     this.DoH = DoH;
+    this.label = label || LABELS.UNKNOWN;
   }
 
   static fromResponseBody(object) {
@@ -65,21 +86,43 @@ export default class Traffic {
   static random() {
     return new Traffic(
       uuid(),
-      '0.0.0.0',
-      '1.1.1.1',
+      getRandomIP(),
+      getRandomIP(),
       getRandomInt(200),
       getRandomInt(200),
-      getRandomInt(999999),
+      getRandomInt(9999),
       getRandomInt(9999),
       getRandomInt(999999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
       getRandomInt(999999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
       getRandomInt(999),
+      getRandomInt(999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
-      Math.round(Math.random() * 100) / 100 + getRandomInt(999),
-      getRandomBool()
+      getRandomBool(),
+      getRandomBool() ? LABELS.MALICIOUS : LABELS.BENIGN
     );
+  }
+
+  static partition(logs, attr, window, num) {
+    var time = logs.map(l => l.TimeStamp);
+    var max = Math.max(...time);
+    var min = max - window;
+    var interval = Math.round(window / num);
+    var labels = [];
+    var data = [];
+    for (let i = 0; i < num; i++) {
+      let low, high;
+      low = min + i * interval;
+      high = min + (i + 1) * interval;
+      labels.push(high);
+      var partition = logs.filter(l => l.TimeStamp > low).filter(l => l.TimeStamp <= high);
+      if (attr) {
+        partition = partition.map(p => p[attr]);
+      }
+      data.push(partition);
+    }
+    return { data: data, labels: labels };
   }
 
   toJson() {

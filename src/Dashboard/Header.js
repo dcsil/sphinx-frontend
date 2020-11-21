@@ -73,20 +73,20 @@ const Header = props => {
         flexBasis={{ base: '100%', md: 'auto' }}
       >
         <Flex
-          align={['center', 'center', 'center', 'center']}
-          justify={['center', 'space-between', 'flex-end', 'flex-end']}
-          direction={['column', 'row', 'row', 'row']}
-          pt={[4, 4, 0, 0]}
+          align={['center', 'center', 'center']}
+          justify={['center', 'center', 'center']}
+          direction={['row', 'row', 'row']}
+          pt={[0, 0, 0]}
         >
           <MenuItems to="/dashboard" active={active === 0} onClick={() => setActive(0)}>
             Dashboard
           </MenuItems>
-          <MenuItems to="/dashboard/anomaly" active={active === 1} onClick={() => setActive(1)}>
-            Anomaly
+          <MenuItems to="/dashboard/analytics" active={active === 1} onClick={() => setActive(1)}>
+            Analytics
           </MenuItems>
-          <MenuItems to="/dashboard/diagram" active={active === 2} onClick={() => setActive(2)}>
+          {/* <MenuItems to="/dashboard/diagram" active={active === 2} onClick={() => setActive(2)}>
             Diagram
-          </MenuItems>
+          </MenuItems> */}
           <MenuItems to="/dashboard/event_log" active={active === 3} onClick={() => setActive(3)}>
             Event Log
           </MenuItems>

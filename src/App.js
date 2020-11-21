@@ -4,9 +4,8 @@ import Landing from './LandingPage';
 import PrivateComponent from './components/PrivateComponent';
 import Dashboard from './Dashboard';
 import Summary from './Dashboard/Summary';
-import Anomaly from './Dashboard/Anomaly';
+import Analytics from './Dashboard/Analytics';
 import EventLog from './Dashboard/EventLog';
-import Diagram from './Dashboard/Diagram';
 import Login from './LoginPage';
 import { history } from './utils/history';
 import { CSSReset, ThemeProvider } from '@chakra-ui/core';
@@ -17,8 +16,7 @@ import { connect } from 'react-redux';
 function App({ random }) {
   setInterval(() => {
     random();
-    console.log('new traffic');
-  }, 5000);
+  }, 2000);
   return (
     <ThemeProvider theme={customTheme}>
       <CSSReset />
@@ -48,23 +46,16 @@ function App({ random }) {
                 <Route path={`${url}/`} component={Summary} exact />
                 <Route
                   exact
+                  path={`${url}/analytics`}
+                  render={props => (
+                    <PrivateComponent {...props} component={Analytics}></PrivateComponent>
+                  )}
+                />
+                <Route
+                  exact
                   path={`${url}/event_log`}
                   render={props => (
                     <PrivateComponent {...props} component={EventLog}></PrivateComponent>
-                  )}
-                />
-                <Route
-                  exact
-                  path={`${url}/anomaly`}
-                  render={props => (
-                    <PrivateComponent {...props} component={Anomaly}></PrivateComponent>
-                  )}
-                />
-                <Route
-                  exact
-                  path={`${url}/diagram`}
-                  render={props => (
-                    <PrivateComponent {...props} component={Diagram}></PrivateComponent>
                   )}
                 />
               </>

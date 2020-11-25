@@ -20,6 +20,7 @@ class BarChart extends React.Component {
     this.attr = props.attribute;
     this.title = props.title;
     this.chartRef = React.createRef();
+    this.colors = props.colors;
     this.data = {
       labels: Traffic.partition(props.traffic.logs, this.attr[0], WINDOW, INTERVAL).labels.map(l =>
         int2sec(l)
@@ -28,7 +29,7 @@ class BarChart extends React.Component {
         let partition = Traffic.partition(props.traffic.logs, attr, WINDOW, INTERVAL);
         return {
           label: this.title[i],
-          backgroundColor: props.colors[i],
+          backgroundColor: this.colors[i],
           data: partition.data.map(d => {
             if (d.length === 0) return 0;
             else return arrSum(d) / d.length;
@@ -37,21 +38,24 @@ class BarChart extends React.Component {
       }),
     };
     this.options = {
-      //   title: {
-      //     display: true,
-      //     text: props.title,
-      //     fontSize: 20,
-      //   },
+      title: {
+        display: props.title.length === 1,
+        text: props.title,
+        fontSize: 20,
+      },
       legend: {
-        display: true,
+        display: props.title.length > 1,
       },
       barValueSpacing: 20,
       scales: {
         xAxes: [
           {
             gridLines: {
-              offsetGridLines: true,
+              display: false,
             },
+            // ticks: {
+            //   display: false,
+            // },
           },
         ],
       },
@@ -60,21 +64,24 @@ class BarChart extends React.Component {
 
   updateData() {
     var logs = this.props.traffic.logs;
-    this.chart.data = {
-      labels: Traffic.partition(logs, this.attr[0], WINDOW, INTERVAL).labels.map(l => int2sec(l)),
-      datasets: this.attr.map((attr, i) => {
-        let partition = Traffic.partition(logs, attr, WINDOW, INTERVAL);
-        return {
-          label: this.title[i],
-          backgroundColor: this.chart.data.datasets[i].backgroundColor,
-          data: partition.data.map(d => {
-            if (d.length === 0) return 0;
-            else return arrSum(d) / d.length;
-          }),
-        };
-      }),
-    };
-    this.chart.update();
+    this.chart.data.labels = Traffic.partition(logs, this.attr[0], WINDOW, INTERVAL).labels.map(l =>
+      int2sec(l)
+    );
+    this.chart.data.datasets = this.attr.map((attr, i) => {
+      let partition = Traffic.partition(logs, attr, WINDOW, INTERVAL);
+      return {
+        label: this.title[i],
+        backgroundColor: this.colors[i],
+        data: partition.data.map(d => {
+          if (d.length === 0) return 0;
+          else return arrSum(d) / d.length;
+        }),
+      };
+    });
+    this.chart.update({
+      duration: 800,
+      easing: 'easeInSine',
+    });
   }
 
   componentDidMount() {
@@ -86,7 +93,7 @@ class BarChart extends React.Component {
   }
 
   componentDidUpdate() {
-    this.updateData();
+    // setTimeout(() => this.updateData(), 5000);
   }
 
   render() {

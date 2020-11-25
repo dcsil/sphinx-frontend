@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Image, Flex } from '@chakra-ui/core';
+import { Text, Image, Flex } from '@chakra-ui/core';
 import logo from '../assets/sphinx_icon.png';
 export default function Logo(props) {
   return (

@@ -5,6 +5,7 @@ import { Tab, Tabs, Box, Typography } from '@material-ui/core';
 import Map from './Map';
 import Packet from './Packet';
 import Flow from './Flow';
+import Monitoring from '../Diagrams/Monitoring';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,6 +44,17 @@ const useStyles = makeStyles({
   },
 });
 
+const Block = props => {
+  return (
+    <div style={{ width: '100%', padding: 10, marginBottom: 40 }}>
+      <p align={'left'} style={{ fontSize: 30, fontWeight: '700', marginBottom: 20 }}>
+        {props.title}
+      </p>
+      {props.children}
+    </div>
+  );
+};
+
 export default function CenteredTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -53,7 +65,20 @@ export default function CenteredTabs() {
 
   return (
     <div className={classes.root}>
-      <Tabs
+      <Block title="Incoming Traffic Monitoring">
+        <Monitoring />
+      </Block>
+      <Block title="Malicious IP Location">
+        <Map />
+      </Block>
+      <Block title="Network Packet">
+        <Packet />
+      </Block>
+      <Block title="Data Flow">
+        <Flow />
+      </Block>
+
+      {/* <Tabs
         value={value}
         onChange={handleChange}
         indicatorColor="primary"
@@ -76,7 +101,7 @@ export default function CenteredTabs() {
       </TabPanel>
       <TabPanel value={value} index={3}>
         Item Four
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

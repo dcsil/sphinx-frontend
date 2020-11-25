@@ -43,7 +43,7 @@ function App({ random }) {
             render={({ match: { url } }) => (
               <>
                 <PrivateComponent component={Dashboard} />
-                <Route path={`${url}/`} component={Summary} exact />
+                {/* <Route path={`${url}/`} component={Summary} exact /> */}
                 <Route
                   exact
                   path={`${url}/analytics`}

@@ -78,10 +78,10 @@ const Header = props => {
           direction={['row', 'row', 'row']}
           pt={[0, 0, 0]}
         >
-          <MenuItems to="/dashboard" active={active === 0} onClick={() => setActive(0)}>
-            Dashboard
-          </MenuItems>
-          <MenuItems to="/dashboard/analytics" active={active === 1} onClick={() => setActive(1)}>
+          {/* <MenuItems to="/dashboard" active={active === 0} onClick={() => setActive(0)}>
+            Dashboar
+          </MenuItems> */}
+          <MenuItems to="/dashboard/analytics" active={active === 0} onClick={() => setActive(0)}>
             Analytics
           </MenuItems>
           {/* <MenuItems to="/dashboard/diagram" active={active === 2} onClick={() => setActive(2)}>

@@ -4,8 +4,6 @@ import { findIpLocation } from '../../../../api/geoLocation.js';
 import { Paper } from '@material-ui/core';
 import BarChart from './bar.js';
 
-var randomColor = require('randomcolor');
-
 const Flow = ({ traffic }) => {
   return (
     // <Dashboard>
@@ -15,18 +13,22 @@ const Flow = ({ traffic }) => {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         padding: '10px 30px',
       }}
     >
-      <Paper elevation={3} style={{ width: '90%' }}>
+      <Paper elevation={3} style={{ width: '48%' }}>
         <BarChart
           title={['FlowBytesSent', 'FlowBytesReceived']}
           attribute={['FlowBytesSent', 'FlowBytesReceived']}
-          colors={[
-            randomColor({ luminosity: 'bright' }) + '50',
-            randomColor({ luminosity: 'bright' }) + '50',
-          ]}
+          colors={['#0022ff50', '#ff007b50']}
+        />
+      </Paper>
+      <Paper elevation={3} style={{ width: '48%' }}>
+        <BarChart
+          title={['FlowSentRate', 'FlowReceivedRate']}
+          attribute={['FlowSentRate', 'FlowReceivedRate']}
+          colors={['#19d90050', '#f2aa0050']}
         />
       </Paper>
     </div>

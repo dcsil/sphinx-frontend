@@ -8,7 +8,6 @@ import './styles.css';
 var Chart = require('chart.js');
 const WINDOW = 3600;
 const INTERVAL = 5;
-var randomColor = require('randomcolor');
 
 const arrSum = arr => arr.reduce((a, b) => a + b, 0);
 
@@ -21,6 +20,7 @@ class BarChart extends React.Component {
     this.attr = props.attribute;
     this.title = props.title;
     this.chartRef = React.createRef();
+    this.colors = props.colors;
     this.data = {
       labels: Traffic.partition(props.traffic.logs, this.attr[0], WINDOW, INTERVAL).labels.map(l =>
         int2sec(l)
@@ -29,7 +29,7 @@ class BarChart extends React.Component {
         let partition = Traffic.partition(props.traffic.logs, attr, WINDOW, INTERVAL);
         return {
           label: this.title[i],
-          backgroundColor: randomColor({ luminosity: 'bright' }) + '50',
+          backgroundColor: this.colors[i],
           data: partition.data.map(d => {
             if (d.length === 0) return 0;
             else return arrSum(d) / d.length;
@@ -67,7 +67,7 @@ class BarChart extends React.Component {
         let partition = Traffic.partition(logs, attr, WINDOW, INTERVAL);
         return {
           label: this.title[i],
-          backgroundColor: this.chart.data.datasets[i].backgroundColor,
+          backgroundColor: this.colors[i],
           data: partition.data.map(d => {
             if (d.length === 0) return 0;
             else return arrSum(d) / d.length;

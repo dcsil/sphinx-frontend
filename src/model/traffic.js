@@ -5,17 +5,10 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 function getRandomBool() {
-  return getRandomInt(10) > getRandomInt(100);
+  return getRandomInt(10) > getRandomInt(200);
 }
 function getRandomIP() {
-  var ip =
-    getRandomInt(200).toString() +
-    '.' +
-    getRandomInt(10).toString() +
-    '.' +
-    getRandomInt(10).toString() +
-    '.' +
-    getRandomInt(10).toString();
+  var ip = getRandomInt(7).toString() + '.' + '1' + '.' + '1' + '.' + '1';
   return ip;
 }
 
@@ -96,10 +89,10 @@ export default class Traffic {
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
       getRandomInt(999999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
-      getRandomInt(999),
+      getRandomInt(99999),
       getRandomInt(999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
-      getRandomBool(),
+      getRandomBool() ? 'True' : 'False',
       getRandomBool() ? LABELS.MALICIOUS : LABELS.BENIGN
     );
   }

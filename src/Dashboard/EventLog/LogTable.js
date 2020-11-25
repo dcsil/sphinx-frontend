@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { traffic } from '../../redux/actions/traffic.js';
+// import { traffic } from '../../redux/actions/traffic.js';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Traffic from '../../model/traffic.js';
+// import { LABELS } from '../../model/traffic.js';
 // import Paper from '@material-ui/core/Paper';
 // import './styles.css';
 
@@ -34,7 +34,8 @@ class LogTable extends React.Component {
           <td>{traffic.PacketLengthMean}</td>
           <td>{traffic.PacketTimeMean}</td>
           <td>{traffic.ResponseTimeTimeMean}</td>
-          <td>{traffic.DoH ? 'Malicious' : 'Benign'}</td>
+          <td>{traffic.DoH ? 'True' : 'False'}</td>
+          <td>{traffic.label}</td>
         </tr>
       ))
       .flat(Infinity);
@@ -61,6 +62,7 @@ class LogTable extends React.Component {
             <th>Packet Time Mean</th>
             <th>Response Time Mean</th>
             <th>DoH</th>
+            <th>Prediction</th>
           </tr>
         </thead>
         <tbody>

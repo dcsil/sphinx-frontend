@@ -75,7 +75,7 @@ const Header = props => {
           <MenuItems to="/how">How It works </MenuItems>
           <MenuItems to="/features">Features </MenuItems>
           <MenuItems to="/pricing">Pricing </MenuItems>
-          <MenuItems to="/dashboard" isLast>
+          <MenuItems to="/dashboard/Analytics" isLast>
             <Button
               size="sm"
               rounded="md"

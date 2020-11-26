@@ -1,43 +1,43 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './styles.css';
 import Traffic from '../../../../model/traffic.js';
 import { int2sec } from '../../../../utils/timeStamp.js';
+import { getData, getTimeWindow } from '../../../../utils/timeStamp';
 
 var Chart = require('chart.js');
 var randomColor = require('randomcolor');
 const WINDOW = 3600;
 const INTERVAL = 7;
-const NOW = Date.now();
+// const NOW = Date.now();
 
-const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-const getTimeWindow = logs => {
-  var times = logs.map(l => l.TimeStamp);
-  var min = Math.min(...times);
-  var max = Math.max(...times);
-  return Math.max(max - min, WINDOW);
-};
+// const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+// const getTimeWindow = logs => {
+//   var times = logs.map(l => l.TimeStamp);
+//   var min = Math.min(...times);
+//   var max = Math.max(...times);
+//   return Math.max(max - min, WINDOW);
+// };
 
-const getCurrentTimeWindow = time => {
-  var results = [...Array(INTERVAL).keys()];
-  for (var i in results) {
-    results[i] = int2sec(time - results[i] * 750);
-  }
-  return results;
-};
+// const getCurrentTimeWindow = time => {
+//   var results = [...Array(INTERVAL).keys()];
+//   for (var i in results) {
+//     results[i] = int2sec(time - results[i] * 750);
+//   }
+//   return results;
+// };
 
-const getData = (logs, attr) => {
-  if (attr) {
-    return logs.length === 0
-      ? Array(INTERVAL).fill(0)
-      : Traffic.partition(logs, attr, getTimeWindow(logs), INTERVAL).data.map(d =>
-          d.length !== 0 ? arrSum(d) / d.length : 0
-        );
-  }
-  return logs.length === 0
-    ? Array(INTERVAL).fill(0)
-    : Traffic.partition(logs, undefined, getTimeWindow(logs), INTERVAL).data.map(d => d.length);
-};
+// const getData = (logs, attr) => {
+//   if (attr) {
+//     return logs.length === 0
+//       ? Array(INTERVAL).fill(0)
+//       : Traffic.partition(logs, attr, getTimeWindow(logs), INTERVAL).data.map(d =>
+//           d.length !== 0 ? arrSum(d) / d.length : 0
+//         );
+//   }
+//   return logs.length === 0
+//     ? Array(INTERVAL).fill(0)
+//     : Traffic.partition(logs, undefined, getTimeWindow(logs), INTERVAL).data.map(d => d.length);
+// };
 
 class MonitoringLineChart extends React.Component {
   constructor(props) {
@@ -46,18 +46,15 @@ class MonitoringLineChart extends React.Component {
     this.line_col = props.color;
     this.chartRef = React.createRef();
     this.data = {
-      labels:
-        props.logs.length === 0
-          ? getCurrentTimeWindow(NOW)
-          : Traffic.partition(
-              props.logs,
-              undefined,
-              getTimeWindow(props.logs),
-              INTERVAL
-            ).labels.map(l => int2sec(l)),
+      labels: Traffic.partition(
+        props.logs,
+        undefined,
+        getTimeWindow(props.logs, props.WINDOW || WINDOW),
+        INTERVAL
+      ).labels.map(l => int2sec(l)),
       datasets: [
         {
-          data: getData(props.logs, props.attribute),
+          data: getData(props.logs, props.attribute, INTERVAL, props.WINDOW || WINDOW),
           backgroundColor: this.line_col + '50',
           borderColor: this.line_col,
           pointBorderColor: this.pt_col,
@@ -112,14 +109,19 @@ class MonitoringLineChart extends React.Component {
   }
 
   updateData() {
-    var window = getTimeWindow(this.props.logs);
-    this.chart.data.labels =
-      this.props.logs.length === 0
-        ? getCurrentTimeWindow(Date.now())
-        : Traffic.partition(this.props.logs, undefined, window, INTERVAL).labels.map(l =>
-            int2sec(l)
-          );
-    this.chart.data.datasets[0].data = getData(this.props.logs, this.props.attribute);
+    var window = getTimeWindow(this.props.logs, this.props.WINDOW || WINDOW);
+    this.chart.data.labels = Traffic.partition(
+      this.props.logs,
+      undefined,
+      window,
+      INTERVAL
+    ).labels.map(l => int2sec(l));
+    this.chart.data.datasets[0].data = getData(
+      this.props.logs,
+      this.props.attribute,
+      INTERVAL,
+      window
+    );
     this.chart.update();
   }
 
@@ -140,5 +142,4 @@ class MonitoringLineChart extends React.Component {
   }
 }
 
-// export default connect(mapStateToProps)(MonitoringLineChart);
 export default MonitoringLineChart;

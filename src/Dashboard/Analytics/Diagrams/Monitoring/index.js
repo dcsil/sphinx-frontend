@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { findIpLocation } from '../../../../api/geoLocation.js';
-import { Button } from '@material-ui/core';
-// import { LABELS } from '../../../../model/traffic.js';
 import MonitoringLineChart from './LineChart.js';
 
 const Monitoring = ({ traffic }) => {
-  const [IP_DICT, setIP_DICT] = React.useState({});
-  const [data, setData] = React.useState([]);
-
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <div style={{ width: '48%' }}>

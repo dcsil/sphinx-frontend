@@ -4,21 +4,21 @@ import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 // import theme from '../../utils/theme';
 import { auth } from '../redux/actions/auth';
+import { traffic } from '../redux/actions/traffic';
 import { connect } from 'react-redux';
 
 const MenuItems = props => {
-  const { children, isLast, to = '/', active = false, onClick, ...rest } = props;
+  const { children, isLast, to = '/', active, ...rest } = props;
   return (
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       display="block"
-      {...rest}
       color={active ? 'primary.600' : 'primary.700'}
       fontWeight={active ? '500' : 'normal'}
       padding={2}
       borderBottomWidth={active ? 2 : 0}
-      onClick={onClick}
+      {...rest}
     >
       <Link to={to}>{children}</Link>
     </Text>
@@ -43,9 +43,14 @@ const MenuItems = props => {
 // );
 
 const Header = props => {
-  const [active, setActive] = React.useState(0);
-  const [show, setShow] = React.useState(false);
-  const toggleMenu = () => setShow(!show);
+  // const [show, setShow] = React.useState(false);
+  const show = true;
+
+  React.useEffect(() => {
+    setInterval(() => {
+      props.random();
+    }, 2000);
+  }, [props]);
 
   return (
     <Flex
@@ -81,16 +86,16 @@ const Header = props => {
           {/* <MenuItems to="/dashboard" active={active === 0} onClick={() => setActive(0)}>
             Dashboar
           </MenuItems> */}
-          <MenuItems to="/dashboard/analytics" active={active === 0} onClick={() => setActive(0)}>
+          <MenuItems to="/dashboard/analytics" active={props.path === '/dashboard/analytics'}>
             Analytics
           </MenuItems>
           {/* <MenuItems to="/dashboard/diagram" active={active === 2} onClick={() => setActive(2)}>
             Diagram
           </MenuItems> */}
-          <MenuItems to="/dashboard/event_log" active={active === 3} onClick={() => setActive(3)}>
+          <MenuItems to="/dashboard/event_log" active={props.path === '/dashboard/event_log'}>
             Event Log
           </MenuItems>
-          <MenuItems to="/" active={active === 4} onClick={() => setActive(4)} isLast>
+          <MenuItems to="/" isLast>
             <Button
               size="sm"
               rounded="md"
@@ -114,6 +119,6 @@ const Header = props => {
 
 const actionCreator = {
   logout: auth.logout,
+  random: traffic.random,
 };
-
 export default connect(null, actionCreator)(Header);

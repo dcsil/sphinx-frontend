@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { findIpLocation } from '../../../../api/geoLocation.js';
 import { Paper } from '@material-ui/core';
 import BarChart from './bar.js';
 
-const Flow = ({ traffic }) => {
+const Flow = () => {
   return (
     // <Dashboard>
     <div
@@ -19,14 +17,16 @@ const Flow = ({ traffic }) => {
     >
       <Paper elevation={3} style={{ width: '48%' }}>
         <BarChart
-          title={['FlowBytesSent', 'FlowBytesReceived']}
+          yLabel="Bytes"
+          title={['Average Flow Bytes Sent', 'Average Flow Bytes Received']}
           attribute={['FlowBytesSent', 'FlowBytesReceived']}
           colors={['#0022ff50', '#ff007b50']}
         />
       </Paper>
       <Paper elevation={3} style={{ width: '48%' }}>
         <BarChart
-          title={['FlowSentRate', 'FlowReceivedRate']}
+          yLabel="Bytes / Sec"
+          title={['Average Flow Sent Rate', 'Average Flow Received Rate']}
           attribute={['FlowSentRate', 'FlowReceivedRate']}
           colors={['#19d90050', '#f2aa0050']}
         />
@@ -34,9 +34,10 @@ const Flow = ({ traffic }) => {
     </div>
   );
 };
-function mapStateToProps(state, ownProps) {
-  return {
-    traffic: state.traffic,
-  };
-}
-export default connect(mapStateToProps)(Flow);
+// function mapStateToProps(state, ownProps) {
+//   return {
+//     traffic: state.traffic,
+//   };
+// }
+// export default connect(mapStateToProps)(Flow);
+export default Flow;

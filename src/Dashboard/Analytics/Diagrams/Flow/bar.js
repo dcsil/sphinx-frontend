@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Traffic from '../../../../model/traffic.js';
 import { int2sec } from '../../../../utils/timeStamp.js';
+import { getData, getTimeWindow } from '../../../../utils/timeStamp';
 import './styles.css';
 
 // const NUM_PT = 30;
@@ -9,12 +10,10 @@ var Chart = require('chart.js');
 const WINDOW = 3600;
 const INTERVAL = 5;
 
-const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-
 class BarChart extends React.Component {
   constructor(props) {
     super(props);
-    // var len = this.props.traffic.logs.length;
+    // var len = this.props.logs.length;
 
     // this.pt_col = randomColor({ luminosity: 'dark', hue: props.color });
     this.attr = props.attribute;
@@ -22,27 +21,22 @@ class BarChart extends React.Component {
     this.chartRef = React.createRef();
     this.colors = props.colors;
     this.data = {
-      labels: Traffic.partition(props.traffic.logs, this.attr[0], WINDOW, INTERVAL).labels.map(l =>
-        int2sec(l)
-      ),
+      labels: Traffic.partition(
+        props.logs,
+        undefined,
+        getTimeWindow(props.logs, props.WINDOW || WINDOW),
+        INTERVAL
+      ).labels.map(l => int2sec(l)),
       datasets: props.attribute.map((attr, i) => {
-        let partition = Traffic.partition(props.traffic.logs, attr, WINDOW, INTERVAL);
         return {
           label: this.title[i],
           backgroundColor: this.colors[i],
-          data: partition.data.map(d => {
-            if (d.length === 0) return 0;
-            else return arrSum(d) / d.length;
-          }),
+          data: getData(props.logs, attr, props.INTERVAL || INTERVAL, props.WINDOW || WINDOW),
         };
       }),
     };
     this.options = {
-      //   title: {
-      //     display: true,
-      //     text: props.title,
-      //     fontSize: 20,
-      //   },
+      responsive: true,
       legend: {
         display: true,
       },
@@ -51,7 +45,19 @@ class BarChart extends React.Component {
         xAxes: [
           {
             gridLines: {
-              offsetGridLines: true,
+              display: false,
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Time Interval',
+            },
+          },
+        ],
+        yAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: props.yLabel || '',
             },
           },
         ],
@@ -60,21 +66,33 @@ class BarChart extends React.Component {
   }
 
   updateData() {
-    var logs = this.props.traffic.logs;
-    this.chart.data = {
-      labels: Traffic.partition(logs, this.attr[0], WINDOW, INTERVAL).labels.map(l => int2sec(l)),
-      datasets: this.attr.map((attr, i) => {
-        let partition = Traffic.partition(logs, attr, WINDOW, INTERVAL);
-        return {
-          label: this.title[i],
-          backgroundColor: this.colors[i],
-          data: partition.data.map(d => {
-            if (d.length === 0) return 0;
-            else return arrSum(d) / d.length;
-          }),
-        };
-      }),
-    };
+    var logs = this.props.logs;
+    var window = getTimeWindow(logs, this.props.WINDOW || WINDOW);
+    this.chart.data.labels = Traffic.partition(
+      logs,
+      this.attr[0],
+      window,
+      this.props.INTERVAL || INTERVAL
+    ).labels.map(l => int2sec(l));
+    this.attr.forEach((attr, i) => {
+      this.chart.data.datasets[i].data = getData(
+        logs,
+        attr,
+        this.props.INTERVAL || INTERVAL,
+        window
+      );
+    });
+    // this.chart.data.datasets = this.attr.map((attr, i) => {
+    //     let partition = Traffic.partition(logs, attr, WINDOW, INTERVAL);
+    //     return {
+    //       label: this.title[i],
+    //       backgroundColor: this.colors[i],
+    //       data: partition.data.map(d => {
+    //         if (d.length === 0) return 0;
+    //         else return arrSum(d) / d.length;
+    //       }),
+    //     };
+    //   });
     this.chart.update();
   }
 
@@ -97,7 +115,7 @@ class BarChart extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    traffic: state.traffic,
+    logs: state.traffic.logs,
   };
 }
 export default connect(mapStateToProps)(BarChart);

@@ -28,3 +28,11 @@
   width: 100% !important;
   height: 50% !important;
 }
+
+.mapLegend {
+  display: 'flex';
+  flex-direction: 'row';
+  justify-content: 'flex-start';
+  align-items: 'center';
+  margin-right: 100;
+}

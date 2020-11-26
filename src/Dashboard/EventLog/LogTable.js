@@ -1,7 +1,6 @@
 import React from 'react';
 import { int2time } from '../../utils/timeStamp.js';
 import { DataGrid } from '@material-ui/data-grid';
-import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 const columns = [
@@ -29,25 +28,17 @@ const columns = [
 ];
 
 class LogTable extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidUpdate() {
-    console.log('update');
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
+  // componentDidUpdate() {
+  //   console.log('update');
+  // }
 
   render() {
     return (
-      <div style={{ height: 650, width: '100%', textAlign: 'center' }}>
-        <Button onClick={this.props.onClick}>Refresh</Button>
-
-        <DataGrid
-          pageSize={10}
-          pagination
-          columns={columns}
-          rows={this.props.logs}
-          align="center"
-        />
+      <div style={{ height: 500, width: '100%', textAlign: 'center' }}>
+        <DataGrid pageSize={7} pagination columns={columns} rows={this.props.logs} align="center" />
       </div>
     );
   }

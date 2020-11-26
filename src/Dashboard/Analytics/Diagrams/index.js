@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Tab, Tabs, Box, Typography } from '@material-ui/core';
+import { /*  Tab, Tabs,  */ Box, Typography } from '@material-ui/core';
 import Map from './Map';
 import Packet from './Packet';
 import Flow from './Flow';
@@ -57,11 +57,6 @@ const Block = props => {
 
 export default function CenteredTabs() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <div className={classes.root}>

@@ -19,13 +19,19 @@ const Packet = ({ traffic }) => {
     >
       <Paper elevation={3} style={{ width: '48%' }}>
         <BarChart
-          title={['Packet Length']}
+          yLabel="Bits / Sec"
+          title={['Average Packet Length']}
           attribute={['PacketLengthMean']}
           colors={['#00ffb270']}
         />
       </Paper>
       <Paper elevation={3} style={{ width: '48%' }}>
-        <BarChart title={['Packet Time']} attribute={['PacketTimeMean']} colors={['#00c8ff70']} />
+        <BarChart
+          yLabel="Seconds"
+          title={['Average Packet Time']}
+          attribute={['PacketTimeMean']}
+          colors={['#00c8ff70']}
+        />
       </Paper>
     </div>
   );

@@ -1,7 +1,14 @@
-import React from 'react';
+// import React from 'react';
+// import { Flex } from '@chakra-ui/core';
+// import Header from './Header';
+// // import Footer from "../sections/Footer";
 
-import DashboardLayout from './DashboardLayout';
-
-export default function Dashboard() {
-  return <DashboardLayout></DashboardLayout>;
-}
+// export default function Dashboard(props) {
+//   return (
+//     <Flex direction="column" align="center" w="100%" m="0 auto" {...props}>
+//       <Header />
+//       {props.children}
+//       {/* <Footer /> */}
+//     </Flex>
+//   );
+// }

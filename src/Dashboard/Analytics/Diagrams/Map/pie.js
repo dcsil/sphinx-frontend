@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Traffic from '../../../../model/traffic.js';
-import { int2sec } from '../../../../utils/timeStamp.js';
 import './styles.css';
 
 // const NUM_PT = 30;
@@ -82,7 +80,9 @@ class PieChart extends React.Component {
   }
 
   render() {
-    return <canvas ref={this.chartRef} className="canvas" style={{ height: '50%' }} />;
+    return (
+      <canvas ref={this.chartRef} className="canvas" style={{ height: '30%', width: '50%' }} />
+    );
   }
 }
 

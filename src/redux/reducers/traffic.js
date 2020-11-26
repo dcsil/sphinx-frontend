@@ -13,7 +13,7 @@ const traffic = (state = initialState, action) => {
   var logs = state.logs;
   switch (action.type) {
     case GENERATE_RANDOM: {
-      logs.push(Traffic.random());
+      logs.push(action.log);
       return {
         ...state,
         logs: logs,

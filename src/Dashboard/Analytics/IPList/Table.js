@@ -24,7 +24,7 @@ const DATA_UNIT = {
   FlowSentRate: 'bytes / sec',
   FlowBytesReceived: 'bytes',
   FlowReceivedRate: 'bytes / sec',
-  PacketLengthMean: 'packets / sec',
+  PacketLengthMean: 'bytes / sec',
   PacketTimeMean: 'seconds',
   ResponseTimeTimeMean: 'seconds',
   DoH: '',
@@ -38,16 +38,16 @@ const DATA_NAMING = {
   FlowSentRate: 'Flow Sent Rate',
   FlowBytesReceived: 'Total Bytes Received',
   FlowReceivedRate: 'Flow Received Rate',
-  PacketLengthMean: 'Average Packet Length',
+  PacketLengthMean: 'Avg Packet Length',
   PacketTimeMean: 'Packet Time',
-  ResponseTimeTimeMean: 'Average Response Time',
+  ResponseTimeTimeMean: 'Avg Response Time',
   DoH: 'DNS over HTTPS',
 };
 
 export default function InfoTable(props) {
   const classes = useStyles();
   var logs = props.logs;
-
+  console.log(logs);
   return (
     <TableContainer component={Paper} style={{ width: '100%' }}>
       <Table className={classes.table} aria-label="table">
@@ -67,13 +67,9 @@ export default function InfoTable(props) {
                   <TableCell key={logs.id + key} component="th" scope="row">
                     {DATA_NAMING[key]}
                   </TableCell>
-                  <TableCell
-                    key={logs.id + logs[key]}
-                    align="right"
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}
-                  >
-                    {logs[key]}
-                    <p style={{ color: '#666', marginLeft: 5 }}>{DATA_UNIT[key]}</p>
+                  <TableCell key={logs.id + logs[key]} align="right">
+                    {logs[key].toString()}
+                    <span style={{ color: '#666', marginLeft: 5 }}>{DATA_UNIT[key]}</span>
                   </TableCell>
                 </TableRow>
               );

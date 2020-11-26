@@ -3,6 +3,7 @@ import LogTable from './LogTable.js';
 import { connect } from 'react-redux';
 import { Button, Paper } from '@material-ui/core';
 import { LABELS } from '../../model/traffic.js';
+import { predict } from '../../api/ai.js';
 
 var percentColors = [
   { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
@@ -34,6 +35,12 @@ var getColorForPercentage = function (pct) {
 const EventLog = props => {
   const [logs, setLogs] = React.useState(props.logs);
 
+  const predict_log = log => {
+    predict(log)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
   return (
     <div style={{ width: '100%', padding: 20 }}>
       <div
@@ -61,9 +68,10 @@ const EventLog = props => {
           </span>
         </Paper>
         <Button onClick={() => setLogs(props.logs)}>Refresh</Button>
+        <Button onClick={() => predict_log(props.logs[0])}>Predict</Button>
       </div>
 
-      <LogTable onClick={() => setLogs(props.logs)} />
+      <LogTable logs={logs} />
     </div>
   );
 };

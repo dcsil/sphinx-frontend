@@ -8,7 +8,7 @@ function getRandomBool() {
   return getRandomInt(10) > getRandomInt(200);
 }
 function getRandomIP() {
-  var ip = getRandomInt(7).toString() + '.' + '1' + '.' + '1' + '.' + '1';
+  var ip = `${getRandomInt(7).toString()}.${getRandomInt(5).toString()}.1.1`;
   return ip;
 }
 
@@ -84,15 +84,15 @@ export default class Traffic {
       getRandomInt(200),
       getRandomInt(200),
       getRandomInt(9999),
-      getRandomInt(9999),
+      Math.round(getRandomInt(9999) / 1.1) / 100,
       getRandomInt(999999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
       getRandomInt(999999),
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
-      getRandomInt(99999),
-      getRandomInt(999),
+      Math.round(getRandomInt(99999) / 1.1) / 100,
+      Math.round(getRandomInt(999) / 1.1) / 100,
       Math.round(Math.random() * 100) / 100 + getRandomInt(999),
-      getRandomBool() ? 'True' : 'False',
+      getRandomBool(),
       getRandomBool() ? LABELS.MALICIOUS : LABELS.BENIGN
     );
   }

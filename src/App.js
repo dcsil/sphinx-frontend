@@ -2,15 +2,13 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Landing from './LandingPage';
 import PrivateComponent from './components/PrivateComponent';
-import Dashboard from './Dashboard';
 import Analytics from './Dashboard/Analytics';
 import EventLog from './Dashboard/EventLog';
 import Login from './LoginPage';
 import { history } from './utils/history';
 import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 import customTheme from './utils/theme';
-import { traffic } from './redux/actions/traffic.js';
-import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
@@ -38,20 +36,28 @@ const App = () => {
             path="/dashboard"
             render={({ match: { url } }) => (
               <>
-                <PrivateComponent component={Dashboard} />
+                {/* <PrivateComponent component={Dashboard}/> */}
                 {/* <Route path={`${url}/`} component={Summary} exact /> */}
                 <Route
                   exact
                   path={`${url}/analytics`}
                   render={props => (
-                    <PrivateComponent {...props} component={Analytics}></PrivateComponent>
+                    <PrivateComponent
+                      {...props}
+                      path={`${url}/analytics`}
+                      component={Analytics}
+                    ></PrivateComponent>
                   )}
                 />
                 <Route
                   exact
                   path={`${url}/event_log`}
                   render={props => (
-                    <PrivateComponent {...props} component={EventLog}></PrivateComponent>
+                    <PrivateComponent
+                      {...props}
+                      path={`${url}/event_log`}
+                      component={EventLog}
+                    ></PrivateComponent>
                   )}
                 />
               </>
@@ -64,7 +70,3 @@ const App = () => {
 };
 
 export default App;
-// const random = {
-//     random: traffic.random,
-// };
-// export default connect(null, random)(App);

@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from './Logo';
+import Logo from '../components/Logo';
 // import theme from '../../utils/theme';
 
 const MenuItems = props => {
@@ -10,6 +10,7 @@ const MenuItems = props => {
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
+      padding={2}
       display="block"
       {...rest}
     >
@@ -46,8 +47,8 @@ const Header = props => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      mb={8}
-      p={8}
+      mb={5}
+      p={5}
       bg={['primary.500', 'primary.500', 'transparent', 'transparent']}
       color={['white', 'white', 'primary.700', 'primary.700']}
       {...props}
@@ -74,7 +75,7 @@ const Header = props => {
           <MenuItems to="/how">How It works </MenuItems>
           <MenuItems to="/features">Features </MenuItems>
           <MenuItems to="/pricing">Pricing </MenuItems>
-          <MenuItems to="/dashboard" isLast>
+          <MenuItems to="/dashboard/Analytics" isLast>
             <Button
               size="sm"
               rounded="md"

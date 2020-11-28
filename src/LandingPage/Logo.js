@@ -5,7 +5,7 @@ export default function Logo(props) {
   return (
     <Box {...props}>
       <Text fontSize="lg" fontWeight="bold">
-        <Image src={logo} size="70%" rounded="1rem" />
+        <Image src={logo} size="50%" rounded="1rem" />
       </Text>
     </Box>
   );

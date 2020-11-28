@@ -12,7 +12,7 @@ export default function Landing() {
         subtitle="Sphinx is a web application that provides user behavior analysis service, applying various machine learning approaches to anomaly detection. It also supports interactive data visualization."
         image={picture}
         ctaText="Go to your dashboard now"
-        ctaLink="/dashboard"
+        ctaLink="/dashboard/analytics"
       />
     </LandingLayout>
   );

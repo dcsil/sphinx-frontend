@@ -1,0 +1,5 @@
+export const GENERATE_RANDOM = 'GENERATE_RANDOM';
+export const UPDATE_TRAFFIC = 'UPDATE_TRAFFIC';
+export const UPDATE_LABEL = 'UPDATE_LABEL';
+export const BLOCK_ADD = 'BLOCK_ADD';
+export const BLOCK_REMOVE = 'BLOCK_REMOVE';

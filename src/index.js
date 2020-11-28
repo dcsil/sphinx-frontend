@@ -9,14 +9,16 @@ import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 import customTheme from './utils/theme';
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <ThemeProvider theme={customTheme}>
         <CSSReset />
         <App />
       </ThemeProvider>
     </Provider>
-  </React.StrictMode>,
+  </React.Fragment>,
+  // </React.StrictMode>
   document.getElementById('root')
 );
 

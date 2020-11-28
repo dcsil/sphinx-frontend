@@ -1,0 +1,30 @@
+.chart-wrapper {
+  padding: 2%;
+}
+
+.main.chart-wrapper {
+  width: 96%;
+  height: 400px;
+}
+
+.sub.chart-wrapper {
+  width: 29%;
+  height: 300px;
+}
+
+/* Simple responsivenss example */
+@media (max-width: 700px) {
+  .sub.chart-wrapper {
+    width: 96%;
+  }
+}
+
+.canvas {
+  width: 100% !important;
+  /* height: 100% !important; */
+}
+
+.cardPanel {
+  width: 100% !important;
+  height: 50% !important;
+}

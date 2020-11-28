@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_OUT } from '../actionTypes';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_OUT } from '../constant/actionTypes';
 
 const isUser = localStorage.getItem('user');
 const initialState = isUser ? { userToken: isUser } : { userToken: null };

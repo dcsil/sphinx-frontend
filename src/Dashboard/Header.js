@@ -2,10 +2,10 @@ import { Box, Button, Flex, Text } from '@chakra-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
-// import theme from '../../utils/theme';
 import { auth } from '../redux/actions/auth';
 import { traffic } from '../redux/actions/traffic';
 import { connect } from 'react-redux';
+import DataLoader from './DataLoader';
 
 const MenuItems = props => {
   const { children, isLast, to = '/', active, ...rest } = props;
@@ -43,15 +43,14 @@ const MenuItems = props => {
 // );
 
 const Header = props => {
-  // const [show, setShow] = React.useState(false);
   const show = true;
-
+  const [count, setCount] = React.useState(0);
   React.useEffect(() => {
-    setInterval(() => {
-      props.random();
-    }, 2000);
-  }, [props]);
-
+    const time = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+    return () => clearInterval(time);
+  });
   return (
     <Flex
       as="nav"
@@ -92,8 +91,11 @@ const Header = props => {
           {/* <MenuItems to="/dashboard/diagram" active={active === 2} onClick={() => setActive(2)}>
             Diagram
           </MenuItems> */}
+          <MenuItems to="/dashboard/cluster" active={props.path === '/dashboard/cluster'}>
+            Real-time Clustering
+          </MenuItems>
           <MenuItems to="/dashboard/event_log" active={props.path === '/dashboard/event_log'}>
-            Event Log
+            Event Logs
           </MenuItems>
           <MenuItems to="/" isLast>
             <Button
@@ -113,6 +115,7 @@ const Header = props => {
           </MenuItems>
         </Flex>
       </Box>
+      <DataLoader time={count} />
     </Flex>
   );
 };

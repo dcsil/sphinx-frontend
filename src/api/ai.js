@@ -23,3 +23,19 @@ export async function predict(log) {
   };
   return axios.post(AI_URL + '/predict', data, defaultConfig);
 }
+
+export async function cluster(logs) {
+  var data = logs.map(l => [
+    l.TimeStamp,
+    l.Duration,
+    l.FlowBytesSent,
+    l.FlowSentRate,
+    l.FlowBytesReceived,
+    l.FlowReceivedRate,
+    l.PacketLengthMean,
+    l.PacketTimeMean,
+    l.ResponseTimeTimeMean,
+    l.DoH ? 1 : 0,
+  ]);
+  return axios.post(AI_URL + '/cluster', { logs: data }, defaultConfig);
+}

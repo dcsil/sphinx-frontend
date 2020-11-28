@@ -106,7 +106,10 @@ const Map = ({ malicious }) => {
 };
 function mapStateToProps(state, ownProps) {
   return {
-    malicious: state.traffic.logs.filter(t => t.label === LABELS.MALICIOUS),
+    malicious: state.traffic.logs.filter(
+      t =>
+        t.label === LABELS.MALICIOUS && state.traffic.blockList.findIndex(b => b === t.SourceIP) < 0
+    ),
   };
 }
 export default connect(mapStateToProps)(Map);

@@ -1,5 +1,5 @@
 import React from 'react';
-import IPList from './IPList/IPList.js';
+import IPList from './IPList';
 import Tabs from './Diagrams';
 
 export default function Analytics() {
@@ -14,11 +14,11 @@ export default function Analytics() {
       }}
     >
       {/* Malicious IP List */}
-      <div style={{ width: '25%', padding: 10, height: 50 }} align={'center'}>
+      <div style={{ width: '27%', padding: 10, height: 50 }} align={'center'}>
         <IPList />
       </div>
       {/* Graph */}
-      <div style={{ width: '75%', padding: 10, height: 50 }} align={'center'}>
+      <div style={{ width: '72%', padding: 10, height: 50 }} align={'center'}>
         <Tabs />
       </div>
     </div>

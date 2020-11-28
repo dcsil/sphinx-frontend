@@ -179,7 +179,7 @@ const IPHeader = ({ checked, handleChange }) => {
   );
 };
 
-const IPList = ({ malicious, update_label }) => {
+const IPList = ({ malicious, update_label, add2blockList }) => {
   const classes = useStyles();
   const [IP, setIP] = React.useState(undefined);
   const [state, setState] = React.useState({ All: false });
@@ -207,9 +207,16 @@ const IPList = ({ malicious, update_label }) => {
       });
     }
     if (eventKey === 1) {
-      for (var k in keys) {
+      for (let k in keys) {
         if (keys[k] !== 'All') {
           update_label(keys[k], LABELS.BENIGN);
+        }
+      }
+    } else if (eventKey === 2) {
+      for (let k in keys) {
+        if (keys[k] !== 'All') {
+          let index = malicious.findIndex(m => m.id === keys[k]);
+          add2blockList(malicious[index].SourceIP);
         }
       }
     }
@@ -243,7 +250,7 @@ const IPList = ({ malicious, update_label }) => {
             padding: '10px 0px',
           }}
         >
-          <AnomalyLineChart color={'#ff0000'} />
+          <AnomalyLineChart malicious={malicious} color={'#ff0000'} />
         </div>
 
         <div className={classes.root}>
@@ -257,7 +264,7 @@ const IPList = ({ malicious, update_label }) => {
             }}
           >
             <DropdownButton
-              disabled={malicious.length === 0}
+              disabled={Object.keys(state).every(key => !state[key])}
               as={ButtonGroup}
               title="Action"
               id="bg-vertical-dropdown-1"
@@ -307,10 +314,14 @@ const IPList = ({ malicious, update_label }) => {
 function mapStateToProps(state, ownProps) {
   return {
     traffic: state.traffic,
-    malicious: state.traffic.logs.filter(t => t.label === LABELS.MALICIOUS),
+    malicious: state.traffic.logs.filter(
+      t =>
+        t.label === LABELS.MALICIOUS && state.traffic.blockList.findIndex(b => b === t.SourceIP) < 0
+    ),
   };
 }
-const update_label = {
+const actions = {
   update_label: traffic.update_label,
+  add2blockList: traffic.blocklist_add,
 };
-export default connect(mapStateToProps, update_label)(IPList);
+export default connect(mapStateToProps, actions)(IPList);

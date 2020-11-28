@@ -17,7 +17,7 @@ function Login({ login, requesting, isLoggedIn }) {
   const { handleSubmit, errors, register } = useForm();
   //   const [isSubmitting, setIsSubmitting] = useState(false);
   if (isLoggedIn) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/dashboard/analytics" />;
   }
 
   function validateName(value) {

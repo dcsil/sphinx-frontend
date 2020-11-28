@@ -5,10 +5,12 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 function getRandomBool() {
-  return getRandomInt(10) > getRandomInt(200);
+  return getRandomInt(10) > getRandomInt(100);
 }
 function getRandomIP() {
-  var ip = `${getRandomInt(7).toString()}.${getRandomInt(5).toString()}.1.1`;
+  var ip = `${getRandomInt(7).toString()}.${getRandomInt(5).toString()}.1.${getRandomInt(
+    5
+  ).toString()}`;
   return ip;
 }
 
@@ -58,7 +60,7 @@ export default class Traffic {
 
   static fromResponseBody(object) {
     return new Traffic(
-      object.id,
+      typeof object.id === 'number' ? uuid() : object.id,
       object.SourceIP,
       object.DestinationIP,
       object.SourcePort,
@@ -72,7 +74,8 @@ export default class Traffic {
       object.PacketLengthMean,
       object.PacketTimeMean,
       object.ResponseTimeTimeMean,
-      object.DoH
+      typeof object.DoH === Boolean ? object.DoH : object.DoH === 'False' ? false : true,
+      undefined
     );
   }
 

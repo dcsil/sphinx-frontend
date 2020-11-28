@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import Landing from './LandingPage';
 import PrivateComponent from './components/PrivateComponent';
 import Analytics from './Dashboard/Analytics';
+import Cluster from './Dashboard/Cluster';
 import EventLog from './Dashboard/EventLog';
 import Login from './LoginPage';
 import { history } from './utils/history';
@@ -46,6 +47,17 @@ const App = () => {
                       {...props}
                       path={`${url}/analytics`}
                       component={Analytics}
+                    ></PrivateComponent>
+                  )}
+                />
+                <Route
+                  exact
+                  path={`${url}/cluster`}
+                  render={props => (
+                    <PrivateComponent
+                      {...props}
+                      path={`${url}/cluster`}
+                      component={Cluster}
                     ></PrivateComponent>
                   )}
                 />

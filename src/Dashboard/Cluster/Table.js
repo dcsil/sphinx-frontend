@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { int2time } from '../../utils/timeStamp';
 
 const useStyles = makeStyles({
   table: {
@@ -15,14 +16,12 @@ const useStyles = makeStyles({
   },
 });
 
-const to3Decimal = number => {
-  return Math.round(number * 1000) / 1000;
-};
-
 const DATA_UNIT = {
+  SourceIP: '',
   DestinationIP: '',
   SourcePort: '',
   DestinationPort: '',
+  TimeStamp: '',
   Duration: 'seconds',
   FlowBytesSent: 'bytes',
   FlowSentRate: 'bytes / sec',
@@ -32,12 +31,15 @@ const DATA_UNIT = {
   PacketTimeMean: 'seconds',
   ResponseTimeTimeMean: 'seconds',
   DoH: '',
+  label: '',
 };
 const DATA_NAMING = {
+  SourceIP: 'Source IP',
   DestinationIP: 'Destination IP',
   SourcePort: 'Source Port',
   DestinationPort: 'Destination Port',
   Duration: 'Duration',
+  TimeStamp: 'Time Stamp',
   FlowBytesSent: 'Total Bytes Sent',
   FlowSentRate: 'Flow Sent Rate',
   FlowBytesReceived: 'Total Bytes Received',
@@ -46,6 +48,7 @@ const DATA_NAMING = {
   PacketTimeMean: 'Packet Time',
   ResponseTimeTimeMean: 'Avg Response Time',
   DoH: 'DNS over HTTPS',
+  label: 'Label',
 };
 
 export default function InfoTable(props) {
@@ -64,16 +67,14 @@ export default function InfoTable(props) {
         </TableHead>
         <TableBody>
           {Object.keys(logs).map(key => {
-            if (['id', 'SourceIP', 'label', 'TimeStamp'].findIndex(l => l === key) === -1) {
+            if (['id'].findIndex(l => l === key) === -1) {
               return (
                 <TableRow key={key}>
                   <TableCell key={logs.id + key} component="th" scope="row">
                     {DATA_NAMING[key]}
                   </TableCell>
                   <TableCell key={logs.id + logs[key]} align="right">
-                    {typeof logs[key] === 'number'
-                      ? to3Decimal(logs[key]).toString()
-                      : logs[key].toString()}
+                    {key === 'TimeStamp' ? int2time(logs[key]) : logs[key].toString()}
                     <span style={{ color: '#666', marginLeft: 5 }}>{DATA_UNIT[key]}</span>
                   </TableCell>
                 </TableRow>

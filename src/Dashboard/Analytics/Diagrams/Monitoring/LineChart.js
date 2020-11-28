@@ -6,38 +6,8 @@ import { getData, getTimeWindow } from '../../../../utils/timeStamp';
 
 var Chart = require('chart.js');
 var randomColor = require('randomcolor');
-const WINDOW = 3600;
-const INTERVAL = 7;
-// const NOW = Date.now();
-
-// const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-// const getTimeWindow = logs => {
-//   var times = logs.map(l => l.TimeStamp);
-//   var min = Math.min(...times);
-//   var max = Math.max(...times);
-//   return Math.max(max - min, WINDOW);
-// };
-
-// const getCurrentTimeWindow = time => {
-//   var results = [...Array(INTERVAL).keys()];
-//   for (var i in results) {
-//     results[i] = int2sec(time - results[i] * 750);
-//   }
-//   return results;
-// };
-
-// const getData = (logs, attr) => {
-//   if (attr) {
-//     return logs.length === 0
-//       ? Array(INTERVAL).fill(0)
-//       : Traffic.partition(logs, attr, getTimeWindow(logs), INTERVAL).data.map(d =>
-//           d.length !== 0 ? arrSum(d) / d.length : 0
-//         );
-//   }
-//   return logs.length === 0
-//     ? Array(INTERVAL).fill(0)
-//     : Traffic.partition(logs, undefined, getTimeWindow(logs), INTERVAL).data.map(d => d.length);
-// };
+const WINDOW = 10;
+const INTERVAL = 10;
 
 class MonitoringLineChart extends React.Component {
   constructor(props) {
@@ -51,7 +21,7 @@ class MonitoringLineChart extends React.Component {
         undefined,
         getTimeWindow(props.logs, props.WINDOW || WINDOW),
         INTERVAL
-      ).labels.map(l => int2sec(l)),
+      ).labels.map(l => int2sec(l * 1000)),
       datasets: [
         {
           data: getData(props.logs, props.attribute, INTERVAL, props.WINDOW || WINDOW),
@@ -115,7 +85,7 @@ class MonitoringLineChart extends React.Component {
       undefined,
       window,
       INTERVAL
-    ).labels.map(l => int2sec(l));
+    ).labels.map(l => int2sec(l * 1000));
     this.chart.data.datasets[0].data = getData(
       this.props.logs,
       this.props.attribute,

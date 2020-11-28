@@ -7,8 +7,8 @@ import './styles.css';
 
 // const NUM_PT = 30;
 var Chart = require('chart.js');
-const WINDOW = 3600;
-const INTERVAL = 5;
+const WINDOW = 10;
+const INTERVAL = 10;
 
 class BarChart extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class BarChart extends React.Component {
         undefined,
         getTimeWindow(props.logs, props.WINDOW || WINDOW),
         INTERVAL
-      ).labels.map(l => int2sec(l)),
+      ).labels.map(l => int2sec(l * 1000)),
       datasets: props.attribute.map((attr, i) => {
         return {
           label: this.title[i],
@@ -73,7 +73,7 @@ class BarChart extends React.Component {
       this.attr[0],
       window,
       this.props.INTERVAL || INTERVAL
-    ).labels.map(l => int2sec(l));
+    ).labels.map(l => int2sec(l * 1000));
     this.attr.forEach((attr, i) => {
       this.chart.data.datasets[i].data = getData(
         logs,

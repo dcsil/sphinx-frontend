@@ -43,7 +43,7 @@ export const getTimeWindow = (logs, WINDOW) => {
 export const getCurrentTimeWindow = (time, INTERVAL) => {
   var results = [...Array(INTERVAL).keys()];
   for (var i in results) {
-    results[i] = int2sec(time - results[i] * 750);
+    results[i] = int2sec(time - results[i]);
   }
   return results;
 };

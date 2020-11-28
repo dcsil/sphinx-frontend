@@ -1,9 +1,9 @@
 import React from 'react';
-import LogTable from './LogTable.js';
+import AntTable from './table';
 import { connect } from 'react-redux';
-import { Button, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { LABELS } from '../../model/traffic.js';
-import { predict } from '../../api/ai.js';
+import BlockList from './BlockList';
 
 var percentColors = [
   { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
@@ -33,28 +33,23 @@ var getColorForPercentage = function (pct) {
 };
 
 const EventLog = props => {
-  const [logs, setLogs] = React.useState(props.logs);
-
-  const predict_log = log => {
-    predict(log)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  };
-
   return (
-    <div style={{ width: '100%', padding: 20 }}>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+      }}
+    >
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
+          width: '22%',
           padding: 20,
         }}
       >
         <Paper
           elevation={3}
-          style={{ padding: 20, display: 'flex', flexDirection: 'column' }}
+          style={{ padding: 20, display: 'flex', flexDirection: 'column', marginBottom: 20 }}
           align={'center'}
         >
           <span> Total Malicious Count </span>
@@ -67,11 +62,36 @@ const EventLog = props => {
             {props.malicious.length}
           </span>
         </Paper>
-        <Button onClick={() => setLogs(props.logs)}>Refresh</Button>
-        <Button onClick={() => predict_log(props.logs[0])}>Predict</Button>
+        <BlockList />
       </div>
-
-      <LogTable logs={logs} />
+      <div
+        style={{
+          width: '77%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+        }}
+      >
+        {/* <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20,
+          }}
+        >
+        </div> */}
+        <AntTable
+          data={props.logs.map(l => {
+            return { key: l.id, ...l };
+          })}
+        />
+        {/* <LogTable logs={props.logs} /> */}
+      </div>
     </div>
   );
 };
@@ -80,7 +100,10 @@ const EventLog = props => {
 function mapStateToProps(state, ownProps) {
   return {
     logs: state.traffic.logs,
-    malicious: state.traffic.logs.filter(l => l.label === LABELS.MALICIOUS),
+    malicious: state.traffic.logs.filter(
+      t =>
+        t.label === LABELS.MALICIOUS && state.traffic.blockList.findIndex(b => b === t.SourceIP) < 0
+    ),
   };
 }
 export default connect(mapStateToProps)(EventLog);

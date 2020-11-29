@@ -3,7 +3,7 @@ import axios from 'axios';
 const KEY = 'ecb8087b90f3e8aa36a450937d1c9a7c';
 // const PROXY = 'https://cors-anywhere.herokuapp.com/';
 // const BACKEND_URL = 'http://www.geoplugin.net/json.gp?ip=';
-const BACKEND_URL = 'http://api.ipstack.com/';
+const BACKEND_URL = 'https://api.ipstack.com/';
 
 const defaultConfig = {
   timeout: 5000,

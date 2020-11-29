@@ -36,7 +36,6 @@ class BarChart extends React.Component {
       }),
     };
     this.options = {
-      responsive: true,
       legend: {
         display: true,
       },

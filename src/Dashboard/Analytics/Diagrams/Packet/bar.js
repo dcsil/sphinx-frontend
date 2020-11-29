@@ -102,7 +102,7 @@ class BarChart extends React.Component {
   }
 
   componentDidUpdate() {
-    if (Date.now() % 1 === 0) this.updateData();
+    this.updateData();
     // setTimeout(() => this.updateData(), 5000);
   }
 

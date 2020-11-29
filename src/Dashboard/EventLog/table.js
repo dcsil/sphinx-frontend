@@ -105,8 +105,8 @@ const columns = [
     sorter: (a, b) => a.PacketTimeMean - b.PacketTimeMean,
   },
   {
-    dataIndex: 'ResponseTimeTimeMean (sec)',
-    title: 'Mean Response Time',
+    dataIndex: 'ResponseTimeTimeMean',
+    title: 'Mean Response Time (sec)',
     key: 'ResponseTimeTimeMean',
     render: v => to4Decimal(v),
     sorter: (a, b) => a.ResponseTimeTimeMean - b.ResponseTimeTimeMean,

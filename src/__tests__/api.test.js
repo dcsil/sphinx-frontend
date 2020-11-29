@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NODE_SERVER } from '../utils/endpoints';
+import { findIpLocation } from '../api/geoLocation';
 
 describe('API test suite', () => {
   it('Test `/test` route', async () => {
@@ -18,4 +19,17 @@ describe('API test suite', () => {
         done();
       });
   });
+  it('Test `/traffic` route', async () => {
+    const { data, status } = await axios.get(`${NODE_SERVER}/traffic?startTime=0&endTime=10`);
+    expect(status).toBe(200);
+    expect(data.length).toBeGreaterThanOrEqual(0);
+  });
 });
+
+// describe('Test geoLocation API', () => {
+//   it('Test `/traffic` API', async () => {
+//     const { data, status } = await axios.get(`${NODE_SERVER}/traffic?startTime=0&endTime=10`);
+//     expect(status).toBe(200);
+//     expect(data.length).toBeGreaterThanOrEqual(0);
+//   });
+// })

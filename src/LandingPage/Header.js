@@ -61,7 +61,7 @@ const Header = props => {
         {show ? <CloseIcon /> : <MenuIcon />}
       </Box>
 
-      <Box
+      {/* <Box
         display={{ base: show ? 'block' : 'none', md: 'block' }}
         flexBasis={{ base: '100%', md: 'auto' }}
       >
@@ -89,7 +89,7 @@ const Header = props => {
             </Button>
           </MenuItems>
         </Flex>
-      </Box>
+      </Box> */}
     </Flex>
   );
 };

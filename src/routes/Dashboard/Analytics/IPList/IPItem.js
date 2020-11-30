@@ -8,7 +8,7 @@ import {
   Checkbox,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Table from './Table.js';
+import Table from '../../../../components/IPTable';
 import { makeStyles } from '@material-ui/core/styles';
 import { int2time } from '../../../../utils/timeStamp.js';
 

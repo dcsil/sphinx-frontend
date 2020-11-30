@@ -11,7 +11,7 @@ import StopIcon from '@material-ui/icons/Stop';
 import CloseIcon from '@material-ui/icons/Close';
 import Modal from './modal';
 import Control from './control';
-import Table from './Table';
+import Table from '../../../components/IPTable';
 
 const SYMBOL = { BENIGN: 'circle', MALICIOUS: 'x', UNKNOWN: 'diamond' };
 const COLOR = { BENIGN: '#004cbf70', MALICIOUS: '#fc0367', UNKNOWN: '#666666' };
@@ -148,7 +148,7 @@ class Cluster extends React.Component {
               </Fab>
               <Fab
                 size="small"
-                variant={!this.state.play ? 'extended' : 'none'}
+                variant={!this.state.play ? 'extended' : 'rounded'}
                 aria-label="play"
                 color="primary"
                 style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}

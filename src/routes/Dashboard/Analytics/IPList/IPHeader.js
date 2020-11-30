@@ -40,8 +40,7 @@ const IPHeader = ({ checked, handleChange }) => {
       expanded={false}
     >
       <AccordionSummary
-        // aria-controls="panel1a-content"
-        // id="panel1a-header"
+        id="ip-list-header-summary"
         expandIcon={<ExpandMoreIcon style={{ opacity: 0 }} />}
         className={classes.root}
       >

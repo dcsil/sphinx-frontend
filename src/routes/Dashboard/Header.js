@@ -48,7 +48,7 @@ const Header = props => {
   React.useEffect(() => {
     const time = setInterval(() => {
       setCount(count + 1);
-    }, 1500);
+    }, 1000);
     return () => clearInterval(time);
   });
   return (

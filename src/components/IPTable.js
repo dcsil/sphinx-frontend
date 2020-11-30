@@ -36,7 +36,6 @@ const to3Decimal = number => {
 
 export default function InfoTable(props) {
   const classes = useStyles();
-
   const renderHeader = () => {
     return (
       <TableHead>

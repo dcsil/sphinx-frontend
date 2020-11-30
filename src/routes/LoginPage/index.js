@@ -22,10 +22,7 @@ function Login({ login, requesting, isLoggedIn }) {
 
   function validateName(value) {
     let error;
-    if (!value) {
-      error = 'Username/email and password are required';
-    }
-
+    if (!value) error = 'Username/email and password are required';
     return error || true;
   }
 
@@ -40,29 +37,34 @@ function Login({ login, requesting, isLoggedIn }) {
     // }, 1000);
   }
 
+  function renderForm() {
+    return Array(2)
+      .fill(0)
+      .map((_, i) => (
+        <FormControl key={i.toString()} isInvalid={i === 0 ? errors.name : errors.password}>
+          <FormLabel htmlFor={i === 0 ? 'username' : 'password'}>
+            {i === 0 ? 'Username or Email' : 'Password'}
+          </FormLabel>
+          <Input
+            name={i === 0 ? 'usernameOrEmail' : 'password'}
+            placeholder={i === 0 ? 'Enter username or email' : 'password'}
+            ref={register({ validate: validateName })}
+          />
+          <FormErrorMessage>
+            {i === 0
+              ? errors.name && errors.name.message
+              : errors.password && errors.password.message}
+          </FormErrorMessage>
+        </FormControl>
+      ))
+      .flat(Infinity);
+  }
+
   return (
     <Flex width="full" mt="15%" align="center" justifyContent="center">
       <Box p={8} width="600px" maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl isInvalid={errors.name}>
-            <FormLabel htmlFor="username">Username or Email</FormLabel>
-            <Input
-              name="usernameOrEmail"
-              placeholder="Enter username or email"
-              ref={register({ validate: validateName })}
-            />
-            <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
-          </FormControl>
-
-          <FormControl isInvalid={errors.password}>
-            <FormLabel htmlFor="password">Password</FormLabel>
-            <Input
-              name="password"
-              placeholder="password"
-              ref={register({ validate: validateName })}
-            />
-            <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
-          </FormControl>
+          {renderForm()}
           <Button
             mt={4}
             color={['primary.500', 'primary.500', 'white', 'white']}

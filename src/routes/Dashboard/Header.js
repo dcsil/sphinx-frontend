@@ -44,7 +44,7 @@ const MenuItems = props => {
 
 const Header = props => {
   const show = true;
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(50);
   React.useEffect(() => {
     const time = setInterval(() => {
       setCount(count + 1);

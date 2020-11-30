@@ -16,11 +16,29 @@ import Table from '../../../components/IPTable';
 const SYMBOL = { BENIGN: 'circle', MALICIOUS: 'x', UNKNOWN: 'diamond' };
 const COLOR = { BENIGN: '#004cbf70', MALICIOUS: '#fc0367', UNKNOWN: '#666666' };
 const unique = arr => arr.filter((item, i) => arr.indexOf(item) === i);
+const LAYOUT = {
+  width: 1000,
+  height: 900,
+  margin: {
+    l: 50,
+    r: 50,
+    b: 100,
+    t: 50,
+    pad: 4,
+  },
+  title: `Principal Component Analysis`,
+  legend: {
+    x: 0,
+    y: 1,
+    font: {
+      size: 17,
+    },
+  },
+};
 
 class Cluster extends React.Component {
   constructor(props) {
     super(props);
-    // this.chart = React.createRef();
     this.state = {
       portion: 1,
       play: false,
@@ -28,27 +46,9 @@ class Cluster extends React.Component {
       display_log: undefined,
       show_info: false,
       data: [],
-      layout: {
-        width: 1000,
-        height: 900,
-        margin: {
-          l: 50,
-          r: 50,
-          b: 100,
-          t: 50,
-          pad: 4,
-        },
-        title: `Principal Component Analysis`,
-        legend: {
-          x: 0,
-          y: 1,
-          font: {
-            size: 17,
-          },
-        },
-      },
-      frames: [],
-      config: {},
+
+      // frames: [],
+      // config: {},
     };
   }
 
@@ -118,6 +118,97 @@ class Cluster extends React.Component {
     // console.log(log)
   }
 
+  renderPanel() {
+    return (
+      <Paper elevation={3} style={{ padding: 10, marginBottom: 20 }}>
+        <span align="center" style={{ width: '100%', padding: 10 }}>
+          Control Panel
+        </span>
+        <div>
+          <Fab
+            variant="extended"
+            size="small"
+            color="primary"
+            aria-label="add"
+            style={{ margin: 10, backgroundColor: '#5c9dff' }}
+            onClick={() => this.refresh(this.state.portion, this.props.logs)}
+          >
+            <RefreshIcon /> Refresh
+          </Fab>
+          <Fab
+            size="small"
+            variant={!this.state.play ? 'extended' : 'rounded'}
+            aria-label="play"
+            color="primary"
+            style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
+            onClick={() => {
+              this.setState({ play: !this.state.play });
+              this.hide_display();
+            }}
+          >
+            {!this.state.play && (
+              <>
+                <PlayArrowIcon />
+                Real-time
+              </>
+            )}
+            {this.state.play && <StopIcon />}
+          </Fab>
+          {this.state.play && (
+            <>
+              <SyncOutlined spin style={{ fontSize: 30 }} />
+              <span font-size="20"> Synchronizing </span>
+            </>
+          )}
+        </div>
+        <Control
+          values={[
+            { title: 'All', value: 1 },
+            { title: '10%', value: 0.1 },
+            { title: '30%', value: 0.3 },
+            { title: '50%', value: 0.5 },
+            { title: '70%', value: 0.7 },
+          ]}
+          onChange={value => this.onChangePercent(value, this.props.logs)}
+        />
+      </Paper>
+    );
+  }
+
+  renderDetails() {
+    return (
+      this.state.display_log !== undefined && (
+        <Paper>
+          <Fab
+            size="small"
+            aria-label="add"
+            color="primary"
+            style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
+            onClick={() => this.hide_display()}
+          >
+            <CloseIcon />
+          </Fab>
+          <Table logs={this.state.display_log} />
+        </Paper>
+      )
+    );
+  }
+
+  renderModal() {
+    return (
+      <div
+        style={{
+          width: '20%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <Modal />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div
@@ -131,92 +222,11 @@ class Cluster extends React.Component {
         }}
       >
         <div style={{ width: '25%', paddingBottom: 30, marginRight: 10 }}>
-          <Paper elevation={3} style={{ padding: 10, marginBottom: 20 }}>
-            <span align="center" style={{ width: '100%', padding: 10 }}>
-              Control Panel
-            </span>
-            <div>
-              <Fab
-                variant="extended"
-                size="small"
-                color="primary"
-                aria-label="add"
-                style={{ margin: 10, backgroundColor: '#5c9dff' }}
-                onClick={() => this.refresh(this.state.portion, this.props.logs)}
-              >
-                <RefreshIcon /> Refresh
-              </Fab>
-              <Fab
-                size="small"
-                variant={!this.state.play ? 'extended' : 'rounded'}
-                aria-label="play"
-                color="primary"
-                style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
-                onClick={() => {
-                  this.setState({ play: !this.state.play });
-                  this.hide_display();
-                }}
-              >
-                {!this.state.play && (
-                  <>
-                    <PlayArrowIcon />
-                    Real-time
-                  </>
-                )}
-                {this.state.play && <StopIcon />}
-              </Fab>
-              {this.state.play && (
-                <>
-                  <SyncOutlined spin style={{ fontSize: 30 }} />
-                  <span font-size="20"> Synchronizing </span>
-                </>
-              )}
-            </div>
-
-            <Control
-              values={[
-                { title: 'All', value: 1 },
-                { title: '10%', value: 0.1 },
-                { title: '30%', value: 0.3 },
-                { title: '50%', value: 0.5 },
-                { title: '70%', value: 0.7 },
-              ]}
-              onChange={value => this.onChangePercent(value, this.props.logs)}
-            />
-          </Paper>
-          {this.state.display_log !== undefined && (
-            <Paper>
-              <Fab
-                size="small"
-                aria-label="add"
-                color="primary"
-                style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
-                onClick={() => this.hide_display()}
-              >
-                <CloseIcon />
-              </Fab>
-              <Table logs={this.state.display_log} />
-            </Paper>
-          )}
+          {this.renderPanel()}
+          {this.renderDetails()}
         </div>
-        <Plot
-          onClick={data => this.show(data)}
-          // ref={this.chartRef}
-          data={this.state.data}
-          layout={this.state.layout}
-          frames={this.state.frames}
-          config={this.state.config}
-        />
-        <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Modal />
-        </div>
+        <Plot onClick={data => this.show(data)} data={this.state.data} layout={LAYOUT} />
+        {this.renderModal()}
       </div>
     );
   }

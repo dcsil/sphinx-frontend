@@ -1,28 +1,12 @@
 import React from 'react';
 import './styles.css';
 import Traffic from '../../../../model/traffic.js';
-import { int2sec } from '../../../../utils/timeStamp.js';
+import { int2sec, getCurrentTimeWindow, getTimeWindow } from '../../../../utils/timeStamp.js';
 
 var Chart = require('chart.js');
 var randomColor = require('randomcolor');
 const WINDOW = 3600;
 const INTERVAL = 5;
-// const NOW = Date.now();
-
-const getTimeWindow = logs => {
-  var times = logs.map(l => l.TimeStamp);
-  var min = Math.min(...times);
-  var max = Math.max(...times);
-  return Math.max(max - min, WINDOW);
-};
-
-const getCurrentTimeWindow = time => {
-  var results = [...Array(INTERVAL).keys()];
-  for (var i in results) {
-    results[i] = int2sec(time - results[i] * 1000);
-  }
-  return results;
-};
 
 class AnomalyLineChart extends React.Component {
   constructor(props) {
@@ -30,22 +14,47 @@ class AnomalyLineChart extends React.Component {
     this.pt_col = randomColor({ luminosity: 'light', hue: props.color });
     this.line_col = props.color;
     this.chartRef = React.createRef();
+    this.data = {};
+    this.options = {};
+  }
+
+  updateData() {
+    var window = getTimeWindow(this.props.malicious, this.props.WINDOW || WINDOW);
+    if (this.props.malicious.length > 0) {
+      this.chart.options.scales.xAxes[0].ticks.display = true;
+    }
+    this.chart.data.labels =
+      this.props.malicious.length === 0
+        ? getCurrentTimeWindow(Date.now())
+        : Traffic.partition(this.props.malicious, undefined, window, INTERVAL).labels.map(l =>
+            int2sec(l * 1000)
+          );
+    this.chart.data.datasets[0].data =
+      this.props.malicious.length === 0
+        ? Array(INTERVAL).fill(0)
+        : Traffic.partition(this.props.malicious, undefined, window, INTERVAL).data.map(
+            d => d.length
+          );
+    this.chart.update();
+  }
+
+  componentDidMount() {
     this.data = {
       labels: Traffic.partition(
-        props.malicious,
+        this.props.malicious,
         undefined,
-        getTimeWindow(props.malicious),
+        getTimeWindow(this.props.malicious, this.props.WINDOW || WINDOW),
         INTERVAL
       ).labels.map(l => int2sec(l * 1000)),
       datasets: [
         {
           data:
-            props.malicious.length === 0
+            this.props.malicious.length === 0
               ? Array(INTERVAL).fill(0)
               : Traffic.partition(
-                  props.malicious,
+                  this.props.malicious,
                   undefined,
-                  getTimeWindow(props.malicious),
+                  getTimeWindow(this.props.malicious),
                   INTERVAL
                 ).data.map(d => d.length),
           backgroundColor: this.line_col + '50',
@@ -100,29 +109,6 @@ class AnomalyLineChart extends React.Component {
         ],
       },
     };
-  }
-
-  updateData() {
-    var window = getTimeWindow(this.props.malicious);
-    if (this.props.malicious.length > 0) {
-      this.chart.options.scales.xAxes[0].ticks.display = true;
-    }
-    this.chart.data.labels =
-      this.props.malicious.length === 0
-        ? getCurrentTimeWindow(Date.now())
-        : Traffic.partition(this.props.malicious, undefined, window, INTERVAL).labels.map(l =>
-            int2sec(l * 1000)
-          );
-    this.chart.data.datasets[0].data =
-      this.props.malicious.length === 0
-        ? Array(INTERVAL).fill(0)
-        : Traffic.partition(this.props.malicious, undefined, window, INTERVAL).data.map(
-            d => d.length
-          );
-    this.chart.update();
-  }
-
-  componentDidMount() {
     this.chart = new Chart(this.chartRef.current, {
       type: 'line',
       data: this.data,

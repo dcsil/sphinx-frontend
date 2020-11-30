@@ -7,7 +7,21 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { PARAM } from '../../constant';
+
+const PARAM = {
+  DestinationIP: { unit: '', naming: 'Destination IP' },
+  SourcePort: { unit: '', naming: 'Source Port' },
+  DestinationPort: { unit: '', naming: 'Destination Port' },
+  Duration: { unit: 'seconds', naming: 'Duration' },
+  FlowBytesSent: { unit: 'bytes', naming: 'Total Bytes Sent' },
+  FlowSentRate: { unit: 'bytes / sec', naming: 'Flow Sent Rate' },
+  FlowBytesReceived: { unit: 'bytes', naming: 'Total Bytes Received' },
+  FlowReceivedRate: { unit: 'bytes / sec', naming: 'Flow Received Rate' },
+  PacketLengthMean: { unit: 'bytes / sec', naming: 'Avg Packet Length' },
+  PacketTimeMean: { unit: 'seconds', naming: 'Packet Time' },
+  ResponseTimeTimeMean: { unit: 'seconds', naming: 'Avg Response Time' },
+  DoH: { unit: '', naming: 'DNS over HTTPS' },
+};
 
 const useStyles = makeStyles({
   table: {

@@ -1,7 +1,5 @@
-// import axios from 'axios';
-// import { NODE_SERVER } from '../../utils/endpoints';
 import {
-  GENERATE_RANDOM,
+  // GENERATE_RANDOM,
   UPDATE_LABEL,
   BLOCK_ADD,
   BLOCK_REMOVE,
@@ -12,20 +10,20 @@ import { LABELS } from '../../model/traffic.js';
 import { predict } from '../../api/ai.js';
 import { get_traffic } from '../../api/backend';
 
-const random = () => dispatch => {
-  let log = Traffic.random();
-  // dispatch({ type: GENERATE_RANDOM, log: log });
-  predict(log)
-    .then(res => {
-      log.label = res.data.data === 0 ? LABELS.BENIGN : LABELS.MALICIOUS;
-      dispatch({ type: GENERATE_RANDOM, log: log });
-    })
-    .catch(err => {
-      console.log(err);
-      log.label = LABELS.UNKNOWN;
-      dispatch({ type: GENERATE_RANDOM, log: log });
-    });
-};
+// const random = () => dispatch => {
+//   let log = Traffic.random();
+//   // dispatch({ type: GENERATE_RANDOM, log: log });
+//   predict(log)
+//     .then(res => {
+//       log.label = res.data.data === 0 ? LABELS.BENIGN : LABELS.MALICIOUS;
+//       dispatch({ type: GENERATE_RANDOM, log: log });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       log.label = LABELS.UNKNOWN;
+//       dispatch({ type: GENERATE_RANDOM, log: log });
+//     });
+// };
 
 const update_traffic = (startTime, endTime) => dispatch => {
   get_traffic(startTime, endTime)
@@ -62,7 +60,7 @@ const blocklist_remove = ip => dispatch => {
 };
 
 export const traffic = {
-  random,
+  // random,
   update_label,
   blocklist_add,
   blocklist_remove,

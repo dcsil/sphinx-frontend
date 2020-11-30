@@ -41,6 +41,9 @@ class BarChart extends React.Component {
       scales: {
         xAxes: [
           {
+            ticks: {
+              display: false,
+            },
             gridLines: {
               display: false,
             },
@@ -65,6 +68,9 @@ class BarChart extends React.Component {
   updateData() {
     var logs = this.props.logs;
     var window = getTimeWindow(logs, this.props.WINDOW || WINDOW);
+    if (logs.length > 0) {
+      this.chart.options.scales.xAxes[0].ticks.display = true;
+    }
     this.chart.data.labels = Traffic.partition(
       logs,
       this.attr,

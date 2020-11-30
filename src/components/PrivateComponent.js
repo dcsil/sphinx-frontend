@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Flex } from '@chakra-ui/core';
-import Header from '../Dashboard/Header';
+import Header from '../routes/Dashboard/Header';
 
 const PrivateComponent = ({ component: Component, ...rest }) => {
   // here, don't deconstruct token so that the child can have access

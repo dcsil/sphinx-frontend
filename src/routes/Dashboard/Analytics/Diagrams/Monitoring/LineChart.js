@@ -65,6 +65,9 @@ class MonitoringLineChart extends React.Component {
         ],
         xAxes: [
           {
+            ticks: {
+              display: false,
+            },
             gridLines: {
               display: true,
             },
@@ -80,6 +83,9 @@ class MonitoringLineChart extends React.Component {
 
   updateData() {
     var window = getTimeWindow(this.props.logs, this.props.WINDOW || WINDOW);
+    if (this.props.logs.length > 0) {
+      this.chart.options.scales.xAxes[0].ticks.display = true;
+    }
     this.chart.data.labels = Traffic.partition(
       this.props.logs,
       undefined,

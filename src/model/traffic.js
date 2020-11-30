@@ -138,6 +138,7 @@ export default class Traffic {
       PacketTimeMean: this.PacketTimeMean,
       ResponseTimeTimeMean: this.ResponseTimeTimeMean,
       DoH: this.DoH,
+      label: this.label,
     };
   }
 }

@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
 
 const IPList = ({ malicious, update_label, add2blockList }) => {
   const classes = useStyles();
-  const [IP, setIP] = React.useState(undefined);
+  // const [IP, setIP] = React.useState(undefined);
+  const [ID, setID] = React.useState(undefined);
   const [state, setState] = React.useState({ All: false });
   React.useEffect(() => {
     malicious.forEach(m => {
@@ -67,7 +68,7 @@ const IPList = ({ malicious, update_label, add2blockList }) => {
   };
 
   return (
-    <ClickAwayListener onClickAway={() => setIP(undefined)}>
+    <ClickAwayListener onClickAway={() => setID(undefined)}>
       <Paper
         elevation={3}
         style={{ width: '100%', padding: 10, display: 'flex', flexDirection: 'column' }}
@@ -136,14 +137,14 @@ const IPList = ({ malicious, update_label, add2blockList }) => {
               key={item.id}
               item={item}
               checked={state[item.id] || state['All']}
-              selected={item.SourceIP === IP}
+              selected={item.id === ID}
               handleChange={handleChange}
               update_label={update_label}
               onClick={() => {
-                if (item.SourceIP === IP) {
-                  setIP(undefined);
+                if (item.id === ID) {
+                  setID(undefined);
                 } else {
-                  setIP(item.SourceIP);
+                  setID(item.id);
                 }
               }}
             />

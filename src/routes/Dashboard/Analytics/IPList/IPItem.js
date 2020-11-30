@@ -37,7 +37,7 @@ const itemStyles = makeStyles(theme => ({
     height: '100%',
   },
   column: {
-    width: '40%',
+    width: '60%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

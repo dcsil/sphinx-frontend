@@ -36,8 +36,6 @@ const to3Decimal = number => {
 
 export default function InfoTable(props) {
   const classes = useStyles();
-  var logs = props.logs;
-
   const renderHeader = () => {
     return (
       <TableHead>
@@ -58,29 +56,35 @@ export default function InfoTable(props) {
     );
   };
 
+  const renderBody = logs => {
+    return (
+      <TableBody>
+        {Object.keys(logs).map(key => {
+          if (['id', 'SourceIP', 'label', 'TimeStamp'].findIndex(l => l === key) === -1) {
+            return (
+              <TableRow key={key}>
+                <TableCell key={logs.id + key} component="th" scope="row">
+                  {PARAM[key].naming}
+                </TableCell>
+                <TableCell key={logs.id + logs[key]} align="right">
+                  {typeof logs[key] === 'number'
+                    ? to3Decimal(logs[key]).toString()
+                    : logs[key].toString()}
+                  <span style={{ color: '#666', marginLeft: 5 }}>{PARAM[key].unit}</span>
+                </TableCell>
+              </TableRow>
+            );
+          } else return null;
+        })}
+      </TableBody>
+    );
+  };
+
   return (
     <TableContainer component={Paper} style={{ width: '100%' }}>
       <Table className={classes.table} aria-label="table">
         {renderHeader()}
-        <TableBody>
-          {Object.keys(logs).map(key => {
-            if (['id', 'SourceIP', 'label', 'TimeStamp'].findIndex(l => l === key) === -1) {
-              return (
-                <TableRow key={key}>
-                  <TableCell key={logs.id + key} component="th" scope="row">
-                    {PARAM[key].naming}
-                  </TableCell>
-                  <TableCell key={logs.id + logs[key]} align="right">
-                    {typeof logs[key] === 'number'
-                      ? to3Decimal(logs[key]).toString()
-                      : logs[key].toString()}
-                    <span style={{ color: '#666', marginLeft: 5 }}>{PARAM[key].unit}</span>
-                  </TableCell>
-                </TableRow>
-              );
-            } else return null;
-          })}
-        </TableBody>
+        {renderBody(props.logs)}
       </Table>
     </TableContainer>
   );

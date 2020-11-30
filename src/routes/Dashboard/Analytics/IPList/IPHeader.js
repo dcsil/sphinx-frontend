@@ -44,7 +44,7 @@ const IPHeader = ({ checked, handleChange }) => {
         expandIcon={<ExpandMoreIcon style={{ opacity: 0 }} />}
         className={classes.root}
       >
-        <div style={{ width: '40%' }}>
+        <div style={{ width: '50%' }}>
           <FormControlLabel
             className={classes.header}
             aria-label="Acknowledge"

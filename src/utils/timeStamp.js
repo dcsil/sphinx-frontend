@@ -6,9 +6,9 @@ function addZero(time) {
   return f_time;
 }
 
-export function int2time(int) {
+export function getTimeObject(int) {
   var t = new Date(NOW + int);
-  t = {
+  return {
     year: addZero(t.getFullYear()),
     month: addZero(t.getMonth()),
     date: addZero(t.getDate()),
@@ -16,19 +16,15 @@ export function int2time(int) {
     min: addZero(t.getMinutes()),
     sec: addZero(t.getSeconds()),
   };
+}
+
+export function int2time(int) {
+  const t = getTimeObject(int);
   return t.year + '-' + t.month + '-' + t.date + '  ' + t.hour + ':' + t.min + ':' + t.sec;
 }
 
 export function int2sec(int) {
-  var t = new Date(NOW + int);
-  t = {
-    year: addZero(t.getFullYear()),
-    month: addZero(t.getMonth()),
-    date: addZero(t.getDate()),
-    hour: addZero(t.getHours()),
-    min: addZero(t.getMinutes()),
-    sec: addZero(t.getSeconds()),
-  };
+  const t = getTimeObject(int);
   return t.hour + ':' + t.min + ':' + t.sec;
 }
 
@@ -48,17 +44,21 @@ export const getCurrentTimeWindow = (time, INTERVAL) => {
   return results;
 };
 
+function getAverage(attr, d) {
+  if (attr) return d.length !== 0 ? arrSum(d) / d.length : 0;
+  return d.length;
+}
+
 export const getData = (logs, attr, INTERVAL, WINDOW) => {
-  if (attr) {
-    return logs.length === 0
-      ? Array(INTERVAL).fill(0)
-      : Traffic.partition(logs, attr, getTimeWindow(logs, WINDOW), INTERVAL).data.map(d =>
-          d.length !== 0 ? arrSum(d) / d.length : 0
-        );
-  }
   return logs.length === 0
     ? Array(INTERVAL).fill(0)
-    : Traffic.partition(logs, undefined, getTimeWindow(logs, WINDOW), INTERVAL).data.map(
-        d => d.length
+    : Traffic.partition(logs, attr, getTimeWindow(logs, WINDOW), INTERVAL).data.map(d =>
+        getAverage(attr, d)
       );
+  // }
+  // return logs.length === 0
+  //   ? Array(INTERVAL).fill(0)
+  //   : Traffic.partition(logs, attr, getTimeWindow(logs, WINDOW), INTERVAL).data.map(
+  //       d => d.length
+  //     );
 };

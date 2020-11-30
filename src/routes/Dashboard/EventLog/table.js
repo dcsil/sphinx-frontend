@@ -7,7 +7,7 @@ import { SyncOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import Dropdown from './dropDown';
-import { formatColumn } from './columns';
+import columns from './columns';
 
 class AntTable extends React.Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class AntTable extends React.Component {
       <>
         {this.renderButtonGroups()}
         <Table
-          columns={formatColumn()}
+          columns={columns()}
           dataSource={this.state.data}
           rowSelection={{ ...rowSelection }}
           scroll={{ x: 4000, y: 500 }}

@@ -15,54 +15,8 @@ class BarChart extends React.Component {
     this.title = props.title;
     this.chartRef = React.createRef();
     this.color = props.color;
-    this.data = {
-      labels: Traffic.partition(
-        props.logs,
-        undefined,
-        getTimeWindow(props.logs, props.WINDOW || WINDOW),
-        props.INTERVAL || INTERVAL
-      ).labels.map(l => int2sec(l * 1000)),
-      datasets: [
-        {
-          label: this.title,
-          backgroundColor: this.color,
-          data: getData(props.logs, this.attr, props.INTERVAL || INTERVAL, props.WINDOW || WINDOW),
-        },
-      ],
-    };
-    this.options = {
-      title: {
-        display: true,
-        text: props.title,
-        fontSize: 20,
-      },
-      legend: { display: false },
-      barValueSpacing: 20,
-      scales: {
-        xAxes: [
-          {
-            ticks: {
-              display: false,
-            },
-            gridLines: {
-              display: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Time Interval',
-            },
-          },
-        ],
-        yAxes: [
-          {
-            scaleLabel: {
-              display: true,
-              labelString: props.yLabel || '',
-            },
-          },
-        ],
-      },
-    };
+    this.data = {};
+    this.options = {};
   }
 
   updateData() {
@@ -90,8 +44,59 @@ class BarChart extends React.Component {
   componentDidMount() {
     this.chart = new Chart(this.chartRef.current, {
       type: 'bar',
-      data: this.data,
-      options: this.options,
+      data: {
+        labels: Traffic.partition(
+          this.props.logs,
+          undefined,
+          getTimeWindow(this.props.logs, this.props.WINDOW || WINDOW),
+          this.props.INTERVAL || INTERVAL
+        ).labels.map(l => int2sec(l * 1000)),
+        datasets: [
+          {
+            label: this.title,
+            backgroundColor: this.color,
+            data: getData(
+              this.props.logs,
+              this.attr,
+              this.props.INTERVAL || INTERVAL,
+              this.props.WINDOW || WINDOW
+            ),
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: this.props.title,
+          fontSize: 20,
+        },
+        legend: { display: false },
+        barValueSpacing: 20,
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                display: false,
+              },
+              gridLines: {
+                display: false,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Time Interval',
+              },
+            },
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: this.props.yLabel || '',
+              },
+            },
+          ],
+        },
+      },
     });
   }
 

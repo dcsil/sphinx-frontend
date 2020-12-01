@@ -13,6 +13,12 @@ const useStyles = makeStyles(theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  container: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
 }));
 
 export default function Control(props) {
@@ -25,7 +31,7 @@ export default function Control(props) {
   };
 
   return (
-    <div width="100%">
+    <div className={classes.container}>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Select a subsect of data</InputLabel>
         <Select

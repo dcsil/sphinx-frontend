@@ -100,7 +100,16 @@ class BarChart extends React.Component {
   }
 
   render() {
-    return <canvas ref={this.chartRef} />;
+    return (
+      <canvas
+        id={`bar-chart: ${this.props.title}`}
+        ref={this.chartRef}
+        aria-label={`bar-chart: ${this.props.title}`}
+        role="img"
+      >
+        <p>{`bar-chart: ${this.props.title}`}</p>
+      </canvas>
+    );
   }
 }
 

@@ -49,6 +49,7 @@ const IPList = ({ malicious, update_label, add2blockList }) => {
   };
 
   const onClickAction = eventKey => {
+    console.log(eventKey);
     let keys = [];
     if (state['All']) keys = Object.keys(state);
     else {
@@ -58,13 +59,13 @@ const IPList = ({ malicious, update_label, add2blockList }) => {
         }
       });
     }
-    if (eventKey === 1) {
+    if (eventKey === 0) {
       for (let k in keys) {
         if (keys[k] !== 'All') {
           update_label(keys[k], LABELS.BENIGN);
         }
       }
-    } else if (eventKey === 2) {
+    } else if (eventKey === 1) {
       for (let k in keys) {
         if (keys[k] !== 'All') {
           let index = malicious.findIndex(m => m.id === keys[k]);
@@ -94,6 +95,7 @@ const IPList = ({ malicious, update_label, add2blockList }) => {
         >
           {DROPDOWN.map((d, i) => (
             <Dropdown.Item
+              key={i.toString()}
               onClick={() => onClickAction(i)}
               className={classes.button}
               eventKey={i.toString()}
@@ -144,24 +146,28 @@ const IPList = ({ malicious, update_label, add2blockList }) => {
 
   return (
     <ClickAwayListener onClickAway={() => setID(undefined)}>
-      <Count>
-        <span> Total Malicious Count </span>
-        <span
-          style={{
-            fontSize: 40,
-            color: getColorForPercentage(Math.max(5 - malicious.length, 0) / 5),
-          }}
-        >
-          {malicious.length}
-        </span>
-        {renderAnomalyChart()}
-        <div className={classes.root}>
-          {renderDropdown()}
-          <IPHeader checked={state['All']} handleChange={handleChange} />
-          {malicious.length === 0 && <p style={{ padding: 20, color: '#66666680' }}>No Anomaly</p>}
-          {renderIPItem()}
-        </div>
-      </Count>
+      <div>
+        <Count>
+          <span> Total Malicious Count </span>
+          <span
+            style={{
+              fontSize: 40,
+              color: getColorForPercentage(Math.max(5 - malicious.length, 0) / 5),
+            }}
+          >
+            {malicious.length}
+          </span>
+          {renderAnomalyChart()}
+          <div className={classes.root}>
+            {renderDropdown()}
+            <IPHeader checked={state['All']} handleChange={handleChange} />
+            {malicious.length === 0 && (
+              <p style={{ padding: 20, color: '#66666680' }}>No Anomaly</p>
+            )}
+            {renderIPItem()}
+          </div>
+        </Count>
+      </div>
     </ClickAwayListener>
   );
 };

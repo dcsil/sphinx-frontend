@@ -47,7 +47,7 @@ class MonitoringLineChart extends React.Component {
         yAxes: [
           {
             ticks: {
-              beginAtZero: false,
+              beginAtZero: true,
               callback: function (value) {
                 if (value >= 0 && value % 1 === 0) {
                   return value;
@@ -114,7 +114,16 @@ class MonitoringLineChart extends React.Component {
   }
 
   render() {
-    return <canvas ref={this.chartRef} className="canvas" />;
+    return (
+      <canvas
+        id={`line-chart: ${this.props.title}`}
+        ref={this.chartRef}
+        aria-label={`line-chart: ${this.props.title}`}
+        role="img"
+      >
+        <p>{`line-chart: ${this.props.title}`}</p>
+      </canvas>
+    );
   }
 }
 

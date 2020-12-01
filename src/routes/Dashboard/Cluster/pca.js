@@ -17,7 +17,7 @@ const SYMBOL = { BENIGN: 'circle', MALICIOUS: 'x', UNKNOWN: 'diamond' };
 const COLOR = { BENIGN: '#004cbf70', MALICIOUS: '#fc0367', UNKNOWN: '#666666' };
 const unique = arr => arr.filter((item, i) => arr.indexOf(item) === i);
 const LAYOUT = {
-  width: 1000,
+  width: 900,
   height: 900,
   margin: {
     l: 50,
@@ -121,10 +121,10 @@ class Cluster extends React.Component {
   renderPanel() {
     return (
       <Paper elevation={3} style={{ padding: 10, marginBottom: 20 }}>
-        <span align="center" style={{ width: '100%', padding: 10 }}>
+        <p align="center" style={{ padding: 10, fontSize: 20, fontWeight: 'bold' }}>
           Control Panel
-        </span>
-        <div>
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', padding: 20 }}>
           <Fab
             variant="extended"
             size="small"
@@ -160,6 +160,7 @@ class Cluster extends React.Component {
               <span font-size="20"> Synchronizing </span>
             </>
           )}
+          <Modal />
         </div>
         <Control
           values={[
@@ -176,21 +177,24 @@ class Cluster extends React.Component {
   }
 
   renderDetails() {
-    return (
-      this.state.display_log !== undefined && (
-        <Paper>
-          <Fab
-            size="small"
-            aria-label="add"
-            color="primary"
-            style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
-            onClick={() => this.hide_display()}
-          >
-            <CloseIcon />
-          </Fab>
-          <Table logs={this.state.display_log} />
-        </Paper>
-      )
+    return this.state.display_log !== undefined ? (
+      <Paper>
+        <Fab
+          size="small"
+          aria-label="add"
+          color="primary"
+          style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
+          onClick={() => this.hide_display()}
+        >
+          <CloseIcon />
+        </Fab>
+        <Table logs={this.state.display_log} />
+      </Paper>
+    ) : (
+      <p align="center" style={{ marginTop: 20 }}>
+        {' '}
+        Click on any point in the 3D graph on the right to show details.
+      </p>
     );
   }
 
@@ -203,9 +207,7 @@ class Cluster extends React.Component {
           flexDirection: 'row',
           justifyContent: 'flex-end',
         }}
-      >
-        <Modal />
-      </div>
+      ></div>
     );
   }
 
@@ -216,17 +218,17 @@ class Cluster extends React.Component {
           width: '100%',
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'space-around',
           alignItems: 'flex-start',
           padding: 10,
         }}
       >
-        <div style={{ width: '25%', paddingBottom: 30, marginRight: 10 }}>
+        <div style={{ width: '30%', paddingBottom: 30, marginRight: 5 }}>
           {this.renderPanel()}
           {this.renderDetails()}
         </div>
         <Plot onClick={data => this.show(data)} data={this.state.data} layout={LAYOUT} />
-        {this.renderModal()}
+        {/* {this.renderModal()} */}
       </div>
     );
   }

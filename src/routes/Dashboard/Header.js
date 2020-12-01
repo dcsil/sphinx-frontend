@@ -6,6 +6,7 @@ import { auth } from '../../redux/actions/auth';
 import { traffic } from '../../redux/actions/traffic';
 import { connect } from 'react-redux';
 import DataLoader from './DataLoader';
+import { Popover } from 'antd';
 
 const MenuItems = props => {
   const { children, isLast, to = '/', active, ...rest } = props;
@@ -15,9 +16,10 @@ const MenuItems = props => {
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       display="block"
       color={active ? 'primary.600' : 'primary.700'}
-      fontWeight={active ? '500' : 'normal'}
+      fontWeight={active ? 'bold' : 'normal'}
       padding={2}
       borderBottomWidth={active ? 2 : 0}
+      borderBottomColor={active ? 'primary.600' : 'transparent'}
       {...rest}
     >
       <Link to={to}>{children}</Link>
@@ -25,32 +27,81 @@ const MenuItems = props => {
   );
 };
 
-// const CloseIcon = () => (
-//   <svg width="24" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-//     <title>Close</title>
-//     <path
-//       fill="white"
-//       d="M9.00023 7.58599L13.9502 2.63599L15.3642 4.04999L10.4142 8.99999L15.3642 13.95L13.9502 15.364L9.00023 10.414L4.05023 15.364L2.63623 13.95L7.58623 8.99999L2.63623 4.04999L4.05023 2.63599L9.00023 7.58599Z"
-//     />
-//   </svg>
-// );
+const DropDown = props => {
+  const [show, setShow] = React.useState(false);
+  return (
+    <div>
+      <Popover
+        content={
+          <div>
+            <HeaderButtoon disabled={props.rate === 10} onClick={props.onClickSlower}>
+              Slower
+            </HeaderButtoon>
+            <span style={{ fontSize: 17, fontWeight: 'bold', margin: 10 }}>{props.rate}</span>
+            <span style={{ color: '#666', marginRight: 10 }}> sec / update </span>
+            <HeaderButtoon disabled={props.rate === 1} onClick={props.onClickFaster}>
+              Faster
+            </HeaderButtoon>
+          </div>
+        }
+        title="Modify update rate"
+        trigger="click"
+        visible={show}
+        onVisibleChange={setShow}
+      >
+        <HeaderButtoon>Sampling Rate</HeaderButtoon>
+      </Popover>
+    </div>
+  );
+};
 
-// const MenuIcon = () => (
-//   <svg width="24px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="white">
-//     <title>Menu</title>
-//     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-//   </svg>
-// );
+const Control = props => {
+  const [saved, setSaved] = React.useState(999 * 999);
+  return (
+    <HeaderButtoon
+      onClick={() => {
+        props.setState(saved);
+        setSaved(props.rate);
+      }}
+    >
+      {props.rate < 999 * 999 ? 'Pause' : 'Resume'}
+    </HeaderButtoon>
+  );
+};
+
+const HeaderButtoon = props => {
+  return (
+    <Button
+      size="sm"
+      rounded="md"
+      marginRight="1rem"
+      color={['primary.500', 'primary.500', 'white', 'white']}
+      bg={['white', 'white', 'primary.500', 'primary.500']}
+      _hover={{
+        bg: ['primary.100', 'primary.100', 'primary.600', 'primary.600'],
+      }}
+      disabled={props.disabled}
+      onClick={() => {
+        // props.logout();
+        props.onClick();
+      }}
+    >
+      {props.children}
+    </Button>
+  );
+};
 
 const Header = props => {
   const show = true;
   const [count, setCount] = React.useState(50);
+  const [rate, setRate] = React.useState(1000);
   React.useEffect(() => {
     const time = setInterval(() => {
       setCount(count + 1);
-    }, 1000);
+    }, rate);
     return () => clearInterval(time);
-  });
+  }, [rate, count]);
+
   return (
     <Flex
       as="nav"
@@ -67,11 +118,6 @@ const Header = props => {
       <Flex align="center">
         <Logo w="100px" color={['white', 'white', 'primary.500', 'primary.500']} />
       </Flex>
-
-      {/* <Box display={{ base: 'block', md: 'none' }} onClick={toggleMenu}>
-        {show ? <CloseIcon /> : <MenuIcon />}
-      </Box> */}
-
       <Box
         display={{ base: show ? 'block' : 'none', md: 'block' }}
         flexBasis={{ base: '100%', md: 'auto' }}
@@ -82,40 +128,37 @@ const Header = props => {
           direction={['row', 'row', 'row']}
           pt={[0, 0, 0]}
         >
-          {/* <MenuItems to="/dashboard" active={active === 0} onClick={() => setActive(0)}>
-            Dashboar
-          </MenuItems> */}
           <MenuItems to="/dashboard/analytics" active={props.path === '/dashboard/analytics'}>
-            Analytics
+            Monitoring
           </MenuItems>
-          {/* <MenuItems to="/dashboard/diagram" active={active === 2} onClick={() => setActive(2)}>
-            Diagram
-          </MenuItems> */}
           <MenuItems to="/dashboard/cluster" active={props.path === '/dashboard/cluster'}>
-            Real-time Clustering
+            Analytics
           </MenuItems>
           <MenuItems to="/dashboard/event_log" active={props.path === '/dashboard/event_log'}>
             Event Logs
           </MenuItems>
-          <MenuItems to="/" isLast>
-            <Button
-              size="sm"
-              rounded="md"
-              color={['primary.500', 'primary.500', 'white', 'white']}
-              bg={['white', 'white', 'primary.500', 'primary.500']}
-              _hover={{
-                bg: ['primary.100', 'primary.100', 'primary.600', 'primary.600'],
-              }}
-              onClick={() => {
-                props.logout();
-              }}
-            >
-              Logout
-            </Button>
-          </MenuItems>
         </Flex>
       </Box>
-      <DataLoader time={count} />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          width: '25%',
+        }}
+      >
+        <DataLoader time={count} />
+        <Control setState={setRate} rate={rate} />
+        <DropDown
+          rate={rate / 1000}
+          onClickSlower={() => setRate(rate + 1000)}
+          onClickFaster={() => setRate(rate - 1000)}
+        />
+        <MenuItems to="/" isLast>
+          <HeaderButtoon onClick={props.logout}>Logout</HeaderButtoon>
+        </MenuItems>
+      </div>
     </Flex>
   );
 };

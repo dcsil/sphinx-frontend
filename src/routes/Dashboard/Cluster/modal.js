@@ -37,8 +37,8 @@ export default class HelperModal extends React.Component {
     return (
       <>
         <Fab
-          size="large"
-          variant={this.state.show_info ? 'extended' : 'none'}
+          size="small"
+          variant={'extended'}
           aria-label="question"
           color="primary"
           style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
@@ -46,11 +46,13 @@ export default class HelperModal extends React.Component {
           onMouseEnter={() => this.setState({ show_info: true })}
           onMouseLeave={() => this.setState({ show_info: false })}
         >
-          <HelpOutlineIcon style={{ fontSize: 30 }} />
-          {this.state.show_info && 'What is Principal Component Analysis?'}
+          <HelpOutlineIcon style={{ fontSize: 25 }} />
+          <p style={{ margin: 3, padding: 3, fontSize: 13 }}>
+            {this.state.show_info ? 'What does this chart mean?' : 'Help'}
+          </p>
         </Fab>
         <Modal
-          width={1000}
+          width={600}
           title="Principal Component Analysis (PCA)"
           visible={this.state.visible}
           onOk={this.handleOk}
@@ -66,7 +68,7 @@ export default class HelperModal extends React.Component {
             important statistical technique used in exploratory data analysis (EDA). It is a process
             of dimension reduction for high dimensional data.
           </p>
-          <br></br>
+          {/* <br></br>
           <span>
             This video offered by <span style={{ fontWeight: 'bold' }}> Udacity </span> provides a
             brief understanding on the technique.
@@ -75,7 +77,7 @@ export default class HelperModal extends React.Component {
           <div
             style={{
               display: 'flex',
-              flexDirection: 'row',
+              flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
               padding: 20,
@@ -83,6 +85,7 @@ export default class HelperModal extends React.Component {
           >
             <YouTube
               videoId={'kw9R0nD69OU'} // defaults -> null
+              alt={'Youtube Video: Principal Components Analysis - Georgia Tech - Machine Learning'}
               opts={{
                 width: 500,
                 playerVars: {
@@ -92,12 +95,14 @@ export default class HelperModal extends React.Component {
               }}
               onReady={this._onYouTubeReady}
             />
-          </div>
+            <p style={{padding: 5, fontWeight: 'bold'}}>Youtube Video: Principal Components Analysis - Georgia Tech - Machine Learning</p>
+          </div> */}
           <br></br>
           <p>
             To have a deeper understanding of this technique, the lecture slide at the following
             link provides insights on the underlying mechanisms.
           </p>
+          <br></br>
           <div style={{ backgroundColor: '#66666610', padding: 10, borderRadius: 10 }}>
             <a
               id="ref-to-pca"

@@ -7,11 +7,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { int2time } from '../utils/timeStamp';
 
 const PARAM = {
+  SourceIP: { unit: '', naming: 'Source IP' },
   DestinationIP: { unit: '', naming: 'Destination IP' },
   SourcePort: { unit: '', naming: 'Source Port' },
   DestinationPort: { unit: '', naming: 'Destination Port' },
+  TimeStamp: { unit: '', naming: 'Time Stamp' },
   Duration: { unit: 'seconds', naming: 'Duration' },
   FlowBytesSent: { unit: 'bytes', naming: 'Total Bytes Sent' },
   FlowSentRate: { unit: 'bytes / sec', naming: 'Flow Sent Rate' },
@@ -21,6 +24,7 @@ const PARAM = {
   PacketTimeMean: { unit: 'seconds', naming: 'Packet Time' },
   ResponseTimeTimeMean: { unit: 'seconds', naming: 'Avg Response Time' },
   DoH: { unit: '', naming: 'DNS over HTTPS' },
+  label: { unit: '', naming: 'label' },
 };
 
 const useStyles = makeStyles({
@@ -30,7 +34,8 @@ const useStyles = makeStyles({
   },
 });
 
-const to3Decimal = number => {
+const to3Decimal = (number, attr) => {
+  if (attr === 'TimeStamp') return int2time(number);
   return Math.round(number * 1000) / 1000;
 };
 
@@ -60,7 +65,7 @@ export default function InfoTable(props) {
     return (
       <TableBody>
         {Object.keys(logs).map(key => {
-          if (['id', 'SourceIP', 'label', 'TimeStamp'].findIndex(l => l === key) === -1) {
+          if (['id'].findIndex(l => l === key) === -1) {
             return (
               <TableRow key={key}>
                 <TableCell key={logs.id + key} component="th" scope="row">
@@ -68,7 +73,7 @@ export default function InfoTable(props) {
                 </TableCell>
                 <TableCell key={logs.id + logs[key]} align="right">
                   {typeof logs[key] === 'number'
-                    ? to3Decimal(logs[key]).toString()
+                    ? to3Decimal(logs[key], key).toString()
                     : logs[key].toString()}
                   <span style={{ color: '#666', marginLeft: 5 }}>{PARAM[key].unit}</span>
                 </TableCell>

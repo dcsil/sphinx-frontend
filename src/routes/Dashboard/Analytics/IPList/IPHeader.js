@@ -28,6 +28,8 @@ const itemStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: 30,
+    fontSize: 13,
+    fontWeight: 'bold',
   },
 }));
 
@@ -51,7 +53,7 @@ const IPHeader = ({ checked, handleChange }) => {
             onClick={event => event.stopPropagation()}
             onFocus={event => event.stopPropagation()}
             control={<Checkbox checked={checked} onChange={handleChange} name="All" />}
-            label={'IP Address'}
+            label={<Typography style={{ fontSize: 13, fontWeight: 'bold' }}>IP Address</Typography>}
           />
         </div>
         <div>

@@ -35,9 +35,10 @@ const itemStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     flexShrink: 0,
     height: '100%',
+    fontSize: 13,
   },
   column: {
-    width: '60%',
+    width: '50%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,7 +89,9 @@ const IPItem = ({ item, selected, onClick, handleChange, checked }) => {
             onClick={event => event.stopPropagation()}
             onFocus={event => event.stopPropagation()}
             control={<Checkbox name={item.id} onChange={handleChange} checked={checked} />}
-            label={item.SourceIP}
+            label={
+              <Typography style={{ fontSize: 13, fontWeight: 'bold' }}>{item.SourceIP}</Typography>
+            }
           />
         </div>
         <div className={classes.column}>

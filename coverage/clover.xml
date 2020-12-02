@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1606870217634" clover="3.2.0">
-  <project timestamp="1606870217635" name="All files">
-    <metrics statements="702" coveredstatements="169" conditionals="295" coveredconditionals="19" methods="319" coveredmethods="26" elements="1316" coveredelements="214" complexity="0" loc="702" ncloc="702" packages="23" files="62" classes="62"/>
+<coverage generated="1606870336561" clover="3.2.0">
+  <project timestamp="1606870336561" name="All files">
+    <metrics statements="702" coveredstatements="169" conditionals="295" coveredconditionals="17" methods="319" coveredmethods="26" elements="1316" coveredelements="212" complexity="0" loc="702" ncloc="702" packages="23" files="62" classes="62"/>
     <package name="src">
       <metrics statements="43" coveredstatements="2" conditionals="32" coveredconditionals="0" methods="17" coveredmethods="1"/>
       <file name="App.js" path="/Users/hirotakaishihara/Desktop/sphinx_tool/sphinx-frontend/src/App.js">
@@ -58,9 +58,9 @@
       </file>
     </package>
     <package name="src.api">
-      <metrics statements="11" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="4"/>
+      <metrics statements="11" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="4"/>
       <file name="ai.js" path="/Users/hirotakaishihara/Desktop/sphinx_tool/sphinx-frontend/src/api/ai.js">
-        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <line num="4" count="2" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
@@ -177,9 +177,9 @@
       </file>
     </package>
     <package name="src.model">
-      <metrics statements="39" coveredstatements="39" conditionals="12" coveredconditionals="9" methods="12" coveredmethods="12"/>
+      <metrics statements="39" coveredstatements="39" conditionals="12" coveredconditionals="8" methods="12" coveredmethods="12"/>
       <file name="traffic.js" path="/Users/hirotakaishihara/Desktop/sphinx_tool/sphinx-frontend/src/model/traffic.js">
-        <metrics statements="39" coveredstatements="39" conditionals="12" coveredconditionals="9" methods="12" coveredmethods="12"/>
+        <metrics statements="39" coveredstatements="39" conditionals="12" coveredconditionals="8" methods="12" coveredmethods="12"/>
         <line num="5" count="252" type="stmt"/>
         <line num="8" count="24" type="stmt"/>
         <line num="11" count="24" type="stmt"/>

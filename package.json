@@ -52,7 +52,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
-    "coverage": "react-scripts test --watchAll=false --coverage --collectCoverageFrom=!src/routes/LandingPage/sa.svg --collectCoverageFrom=!src/routes/LandingPage/Logo.js --collectCoverageFrom=!src/utils/timeStamp.js --collectCoverageFrom=!src/utils/color.js --collectCoverageFrom=!src/serviceWorker.js --collectCoverageFrom=!src/index.js --collectCoverageFrom=!src/redux/reducers/*.js --collectCoverageFrom=!src/redux/actions/*.js --collectCoverageFrom=!src/components/IPTable.js --collectCoverageFrom=!src/components/BarChart.js --collectCoverageFrom=!src/components/PrivateComponent.js --collectCoverageFrom=!src/components/PrivateRoute.js --collectCoverageFrom=!src/components/SplitButton.js --collectCoverageFrom=!src/components/Navbar.js --collectCoverageFrom=!src/routes/Dashboard/**/*.js",
+    "coverage": "react-scripts test  -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "husky": {

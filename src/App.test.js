@@ -15,28 +15,17 @@ test('renders landing', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-// test('renders login', async () => {
-//   // await act(async () => {
-//   //   const { getByText } = render(
-//   //     <Provider store={store}>
-//   //       <ThemeProvider theme={customTheme}>
-//   //         <CSSReset />
-//   //         <Login />
-//   //       </ThemeProvider>
-//   //     </Provider>
-//   //   );
-//   //   const linkElement = getByText(/Email/i);
-//   //   expect(linkElement).toBeInTheDocument();
-//   // });
-
-//   const { getByText } = await render(
-//     <Provider store={store}>
-//       <ThemeProvider theme={customTheme}>
-//         <CSSReset />
-//         <Login />
-//       </ThemeProvider>
-//     </Provider>
-//   );
-//   const text = await waitForElement(() => getByText('Username or Email'));
-//   expect(text).toBeInTheDocument();
-// });
+test('renders login', async () => {
+  const { getByText } = await render(
+    <Provider store={store}>
+      <ThemeProvider theme={customTheme}>
+        <CSSReset />
+        <Login />
+      </ThemeProvider>
+    </Provider>
+  );
+  const text1 = await waitForElement(() => getByText('Username or Email'));
+  const text2 = await waitForElement(() => getByText('Password'));
+  expect(text1).toBeInTheDocument();
+  expect(text2).toBeInTheDocument();
+});

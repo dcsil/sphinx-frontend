@@ -15,28 +15,28 @@ test('renders landing', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-test('renders login', async () => {
-  // await act(async () => {
-  //   const { getByText } = render(
-  //     <Provider store={store}>
-  //       <ThemeProvider theme={customTheme}>
-  //         <CSSReset />
-  //         <Login />
-  //       </ThemeProvider>
-  //     </Provider>
-  //   );
-  //   const linkElement = getByText(/Email/i);
-  //   expect(linkElement).toBeInTheDocument();
-  // });
+// test('renders login', async () => {
+//   // await act(async () => {
+//   //   const { getByText } = render(
+//   //     <Provider store={store}>
+//   //       <ThemeProvider theme={customTheme}>
+//   //         <CSSReset />
+//   //         <Login />
+//   //       </ThemeProvider>
+//   //     </Provider>
+//   //   );
+//   //   const linkElement = getByText(/Email/i);
+//   //   expect(linkElement).toBeInTheDocument();
+//   // });
 
-  const { getByText } = await render(
-    <Provider store={store}>
-      <ThemeProvider theme={customTheme}>
-        <CSSReset />
-        <Login />
-      </ThemeProvider>
-    </Provider>
-  );
-  const text = await waitForElement(() => getByText('Username or Email'));
-  expect(text).toBeInTheDocument();
-});
+//   const { getByText } = await render(
+//     <Provider store={store}>
+//       <ThemeProvider theme={customTheme}>
+//         <CSSReset />
+//         <Login />
+//       </ThemeProvider>
+//     </Provider>
+//   );
+//   const text = await waitForElement(() => getByText('Username or Email'));
+//   expect(text).toBeInTheDocument();
+// });

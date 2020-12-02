@@ -1,0 +1,22 @@
+# Github actions for Flask model environment
+
+name: CI
+
+on: [push]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - name: upload code climate
+        env:
+          CC_TEST_REPORTER_ID: 1c4ba1b8b8b27e394b1e7e88f6bec9f6ea66276b29f0224e6354579339b28984
+        run: |
+          export GIT_BRANCH="${GITHUB_REF##*/}"
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter format-coverage -t lcov
+          ./cc-test-reporter upload-coverage --id $CC_TEST_REPORTER_ID

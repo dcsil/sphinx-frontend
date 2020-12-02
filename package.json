@@ -52,7 +52,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
-    "coverage": "react-scripts test  -- --coverage --watchAll=false",
+    "coverage": "react-scripts test --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
   "husky": {

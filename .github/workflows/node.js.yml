@@ -23,13 +23,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-<<<<<<< HEAD
-=======
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.jason') }}
->>>>>>> bfd239c5b5780f5b326f3193baecc80c9cfdae3e
       - run: npm install
       - run: npm run test
       - run: npm run build

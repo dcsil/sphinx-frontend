@@ -8,7 +8,44 @@ import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 // so we can import fireEvent and screen here as well
 import { render, fireEvent, screen } from '../../test-utils';
 import Header from '../routes/Dashboard/Header';
+import Login from '../routes/LoginPage';
 import Private from '../components/PrivateComponent';
+import Logo from '../routes/LandingPage/Logo';
+import Traffic, { LABELS } from '../model/traffic';
+import IPItem from '../routes/Dashboard/Analytics/IPList/IPItem';
+import IPList from '../routes/Dashboard/Analytics/IPList';
+import IPHeader from '../routes/Dashboard/Analytics/IPList/IPHeader';
+import Diagrams from '../routes/Dashboard/Analytics/Diagrams'
+import DropDown from '../routes/Dashboard/EventLog/dropDown';
+import Modal from '../routes/Dashboard/Cluster/modal';
+import '@testing-library/jest-dom/extend-expect';
+import BlockList from '../routes/Dashboard/EventLog/BlockList';
+import Flow from '../routes/Dashboard/Analytics/Diagrams/Flow';
+import Pie from '../routes/Dashboard/Analytics/Diagrams/Map/pie';
+import Monitoring from '../routes/Dashboard/Analytics/Diagrams/Monitoring';
+import Control from '../routes/Dashboard/Cluster/control';
+import Packet from '../routes/Dashboard/Analytics/Diagrams/Packet';
+
+
+// Component Test
+var tList = [];
+for (var i = 0; i < 20; i++) {
+  tList.push(Traffic.random());
+}
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: null, // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
 
 it('Renders the connected PrivateComponent', () => {
   render(
@@ -23,6 +60,186 @@ it('Renders the connected PrivateComponent', () => {
   expect(screen).not.toBeUndefined();
 });
 
+test('Render Modal', () => {
+  render(
+    <ThemeProvider>
+      <CSSReset />
+      <Router history={history}>
+        <Modal />
+      </Router>
+    </ThemeProvider>
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+test('Render Modal', () => {
+  render(<Logo />);
+  expect(screen).not.toBeUndefined();
+});
+
+test('Render IPItem', () => {
+  render(
+    <IPItem
+      item={tList[0]}
+      selected={true}
+      onClick={() => {}}
+      handleChange={() => {}}
+      checked={true}
+    />
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+test('Render IPHeader', () => {
+  render(<IPHeader handleChange={() => {}} checked={true} />);
+  expect(screen).not.toBeUndefined();
+});
+
+test('Render DropDown', () => {
+  render(<DropDown handleMenuClick={() => {}} disabled={false} />);
+  expect(screen).not.toBeUndefined();
+});
+
+test('Render DropDown', () => {
+  render(
+    <ThemeProvider>
+      <CSSReset />
+      <Router history={history}>
+        <Header />
+      </Router>
+    </ThemeProvider>
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+test('Render Login', () => {
+  render(
+    <ThemeProvider>
+      <CSSReset />
+      <Router history={history}>
+        <Login requesting={true} isLoggedIn={true} />
+      </Router>
+    </ThemeProvider>
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+test('Render Login', () => {
+  render(
+    <ThemeProvider>
+      <CSSReset />
+      <Router history={history}>
+        <Login requesting={false} isLoggedIn={false} />
+      </Router>
+    </ThemeProvider>
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render Control', () => {
+  render(
+    <Control
+      values={[
+        { title: 'All', value: 1 },
+        { title: '10%', value: 0.1 },
+        { title: '30%', value: 0.3 },
+        { title: '50%', value: 0.5 },
+        { title: '70%', value: 0.7 },
+      ]}
+      onChange={value => {}}
+    />
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render Flow', () => {
+  render(<Flow />, { initialState: { traffic: { logs: tList } } });
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render Pie', () => {
+  render(
+    <Pie data={[{ continent: 'a' }, { continent: 'b' }, { continent: 'b' }, { continent: 'c' }]} />,
+    { initialState: { traffic: { logs: tList } } }
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render Monitoring', () => {
+  render(
+    <Monitoring />,
+    { initialState: { traffic: { logs: tList } } }
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render Packet', () => {
+  render(
+    <Packet />,
+    { initialState: { traffic: { logs: tList } } }
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render IpList - no block', () => {
+  render(
+    <IPList />,
+    { initialState: { traffic: { logs: tList, blockList: [] } } }
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render IpList', () => {
+  render(
+    <IPList />,
+    { initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } } }
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+it('Render BlockList', () => {
+  render(
+    <BlockList />,
+    { initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } } }
+  );
+  expect(screen).not.toBeUndefined();
+});
+
+
+// it('Render Diagrams', () => {
+//   render(
+//     <Diagrams />
+//   );
+//   expect(screen).not.toBeUndefined();
+// });
+
+// it('Renders the connected EventLog', () => {
+//     render(
+//       <ThemeProvider>
+//         <CSSReset />
+//         <Router history={history}>
+//           <EventLog />
+//         </Router>
+//       </ThemeProvider>,
+//       { initialState: { traffic: { logs: [], blockList: [] } } }
+//     );
+//     expect(screen).not.toBeUndefined();
+//   });
+
+// test('renders login', async () => {
+//   const { getByText } = await render(
+//     <Provider store={store}>
+//       <ThemeProvider>
+//         <CSSReset />
+//         <Login />
+//       </ThemeProvider>
+//     </Provider>
+//   );
+//   const text1 = await waitForElement(() => getByText('Username or Email'));
+//   const text2 = await waitForElement(() => getByText('Password'));
+//   expect(text1).toBeInTheDocument();
+//   expect(text2).toBeInTheDocument();
+// });
 // it('Renders the connected PrivateComponent', () => {
 //   render(
 //     <ThemeProvider>

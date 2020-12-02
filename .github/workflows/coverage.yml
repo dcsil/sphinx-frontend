@@ -1,13 +1,24 @@
 # Github actions for Flask model environment
 
+<<<<<<< HEAD
 name: CI
 
 on: [push]
+=======
+name: Coverage CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+>>>>>>> bfd239c5b5780f5b326f3193baecc80c9cfdae3e
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   coverage:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
@@ -20,3 +31,21 @@ jobs:
           chmod +x ./cc-test-reporter
           ./cc-test-reporter format-coverage -t lcov
           ./cc-test-reporter upload-coverage --id $CC_TEST_REPORTER_ID
+=======
+    
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js '14.x'
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - run: npm install 
+    - uses: paambaati/codeclimate-action@v2.7.4
+      env:
+        CC_TEST_REPORTER_ID: 1c4ba1b8b8b27e394b1e7e88f6bec9f6ea66276b29f0224e6354579339b28984
+      with:
+        coverageCommand: npm run coverage
+>>>>>>> bfd239c5b5780f5b326f3193baecc80c9cfdae3e

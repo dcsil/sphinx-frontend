@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -84,7 +84,7 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -92,50 +92,50 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var percentColors = [
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var percentColors = <span class="cstat-no" title="statement not covered" >[</span>
   { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
   { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
   { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } },
 ];
 &nbsp;
-export function getColorForPercentage(pct) {
+export function <span class="fstat-no" title="function not covered" >getColorForPercentage(</span>pct) {
   // CREDIT: https://stackoverflow.com/questions/7128675/from-green-to-red-color-depend-on-percentage
-  for (var i = 1; i &lt; percentColors.length - 1; i++) {
-    if (pct &lt; percentColors[i].pct) {
-      break;
+<span class="cstat-no" title="statement not covered" >  for (var i = <span class="cstat-no" title="statement not covered" >1;</span> i &lt; percentColors.length - 1; i++) {</span>
+<span class="cstat-no" title="statement not covered" >    if (pct &lt; percentColors[i].pct) {</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
     }
   }
-  var lower = percentColors[i - 1];
-  var upper = percentColors[i];
-  var range = upper.pct - lower.pct;
-  var rangePct = (pct - lower.pct) / range;
-  var pctLower = 1 - rangePct;
-  var pctUpper = rangePct;
-  var color = {
+  var lower = <span class="cstat-no" title="statement not covered" >percentColors[i - 1];</span>
+  var upper = <span class="cstat-no" title="statement not covered" >percentColors[i];</span>
+  var range = <span class="cstat-no" title="statement not covered" >upper.pct - lower.pct;</span>
+  var rangePct = <span class="cstat-no" title="statement not covered" >(pct - lower.pct) / range;</span>
+  var pctLower = <span class="cstat-no" title="statement not covered" >1 - rangePct;</span>
+  var pctUpper = <span class="cstat-no" title="statement not covered" >rangePct;</span>
+  var color = <span class="cstat-no" title="statement not covered" >{</span>
     r: Math.floor((lower.color.r * pctLower + upper.color.r * pctUpper) * 0.8),
     g: Math.floor((lower.color.g * pctLower + upper.color.g * pctUpper) * 0.8),
     b: Math.floor((lower.color.b * pctLower + upper.color.b * pctUpper) * 0.8),
   };
-  return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
+<span class="cstat-no" title="statement not covered" >  return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';</span>
   // or output as hex if preferred
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -145,7 +145,7 @@ export function getColorForPercentage(pct) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 02 2020 02:35:56 GMT-0500 (Eastern Standard Time)
+                at Wed Dec 02 2020 17:36:31 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

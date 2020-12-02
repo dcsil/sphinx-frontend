@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/25</span>
+                <span class='fraction'>0/25</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.85% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/20</span>
+                <span class='fraction'>0/20</span>
             </div>
         
             
@@ -152,17 +152,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -174,19 +174,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,7 +220,7 @@ import { get_traffic } from '../../api/backend';
 //     });
 // };
 &nbsp;
-const update_traffic = (startTime, endTime) =&gt; <span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {
+const update_traffic = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>tartTime, endTime) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >  get_traffic(startTime, endTime)</span>
     .then(<span class="fstat-no" title="function not covered" >re</span>s =&gt; {
 <span class="cstat-no" title="statement not covered" >      if (res.data.length === 0) <span class="cstat-no" title="statement not covered" >return;</span></span>
@@ -242,19 +242,19 @@ const update_traffic = (startTime, endTime) =&gt; <span class="fstat-no" title="
     .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; <span class="cstat-no" title="statement not covered" >console.error(err))</span>;
 };
 &nbsp;
-const update_label = (id, label) =&gt; dispatch =&gt; {
-  dispatch({ type: UPDATE_LABEL, id: id, label: label });
+const update_label = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(i</span>d, label) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch({ type: UPDATE_LABEL, id: id, label: label });</span>
 };
 &nbsp;
-const blocklist_add = ip =&gt; dispatch =&gt; {
-  dispatch({ type: BLOCK_ADD, ip: ip });
+const blocklist_add = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ip</span> =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch({ type: BLOCK_ADD, ip: ip });</span>
 };
 &nbsp;
-const blocklist_remove = ip =&gt; dispatch =&gt; {
-  dispatch({ type: BLOCK_REMOVE, ip: ip });
+const blocklist_remove = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ip</span> =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch({ type: BLOCK_REMOVE, ip: ip });</span>
 };
 &nbsp;
-export const traffic = {
+export const traffic = <span class="cstat-no" title="statement not covered" >{</span>
   // random,
   update_label,
   blocklist_add,
@@ -268,7 +268,7 @@ export const traffic = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 02 2020 02:35:56 GMT-0500 (Eastern Standard Time)
+                at Wed Dec 02 2020 17:36:31 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -1,8 +1,10 @@
 // test-utils.js
 import React from 'react'
 import { render as rtlRender } from '@testing-library/react'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+
 // Import your own reducer
 import reducer from './src/redux/reducers'
 
@@ -10,7 +12,7 @@ function render(
   ui,
   {
     initialState,
-    store = createStore(reducer, initialState),
+    store = createStore(reducer, initialState, applyMiddleware(thunk)),
     ...renderOptions
   } = {}
 ) {

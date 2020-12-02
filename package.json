@@ -32,6 +32,7 @@
     "randomcolor": "^0.6.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
+    "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.0",
     "react-hook-form": "^6.11.0",
     "react-icons": "^3.11.0",
@@ -51,6 +52,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
+    "coverage": "react-scripts test --watchAll=false --coverage --collectCoverageFrom=!src/routes/LandingPage/sa.svg --collectCoverageFrom=!src/routes/LandingPage/Logo.js --collectCoverageFrom=!src/utils/timeStamp.js --collectCoverageFrom=!src/utils/color.js --collectCoverageFrom=!src/serviceWorker.js --collectCoverageFrom=!src/index.js --collectCoverageFrom=!src/redux/reducers/*.js --collectCoverageFrom=!src/redux/actions/*.js --collectCoverageFrom=!src/components/IPTable.js --collectCoverageFrom=!src/components/BarChart.js --collectCoverageFrom=!src/components/PrivateComponent.js --collectCoverageFrom=!src/components/PrivateRoute.js --collectCoverageFrom=!src/components/SplitButton.js --collectCoverageFrom=!src/components/Navbar.js --collectCoverageFrom=!src/routes/Dashboard/**/*.js",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -81,5 +83,12 @@
     "pretty-quick": "^3.1.0",
     "react-test-renderer": "^17.0.1",
     "redux-mock-store": "^1.5.4"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/src/redux/reducers/",
+      "!<rootDir>/src/route/Dashboard/"
+    ]
   }
 }

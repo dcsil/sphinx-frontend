@@ -3,7 +3,6 @@ import { Modal, Button } from 'antd';
 import 'antd/dist/antd.css';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import Fab from '@material-ui/core/Fab';
-// import YouTube from 'react-youtube';
 
 export default class HelperModal extends React.Component {
   state = { visible: false };
@@ -28,10 +27,10 @@ export default class HelperModal extends React.Component {
     });
   };
 
-  _onYouTubeReady(event) {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  }
+  // _onYouTubeReady(event) {
+  //   // access to player in all event handlers via event.target
+  //   event.target.pauseVideo();
+  // }
 
   render() {
     return (

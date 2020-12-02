@@ -1,15 +1,13 @@
 import React from 'react';
 import { render, waitForElement } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 import App from './App';
 import EventLog from './routes/Dashboard/EventLog'
 import Logo from './routes/LandingPage/Logo';
-import { Provider } from 'react-redux';
-import store from './redux/store';
-import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 import Traffic, { LABELS } from './model/traffic';
 import Count from './components/Counting'
-import IPTable from './components/IPTable'
+import BlockTable from './routes/Dashboard/EventLog/BlockList/Table'
+import Map from './routes/Dashboard/Analytics/Diagrams/Map/map'
+
 import '@testing-library/jest-dom/extend-expect';
 
 test('Render landing', () => {
@@ -23,23 +21,36 @@ var tList = [];
 for (var i = 0; i < 20; i++) {
   tList.push(Traffic.random());
 }
+
 test('Render Count', () => {
   const { getByText } = render(<Count><span>test</span></Count>);
   const linkElement = getByText(/test/i);
   expect(linkElement).toBeInTheDocument();
 });
 
-test('Render IPTable', () => {
-  const { getByText } = render(<IPTable logs={tList}/>);
-  const linkElement = getByText(/Parameters/i);
-  expect(linkElement).toBeInTheDocument();
+test('Render BlockTable', () => {
+  render(<BlockTable blockList={tList.map(t => t.SourceIP)} blockLogs={tList}/>);
+  expect(screen).not.toBeUndefined();
 });
 
-test('Render Logo', () => {
-  const { getByAltText } = render(<Logo />);
-  const linkElement = getByAltText(/landing-logo/i);
-  expect(linkElement).toBeInTheDocument();
-});
+
+
+// test('Render Map', () => {
+//   render(<Map data={[{name: 'test', coordinates: [0, 0], color: '#666666'}]}/>);
+//   expect(screen).not.toBeUndefined();
+// });
+
+// test('Render IPTable', () => {
+//   const { getByText } = render(<IPTable logs={tList}/>);
+//   const linkElement = getByText(/Parameters/i);
+//   expect(linkElement).toBeInTheDocument();
+// });
+
+// test('Render IPTable', () => {
+//   const { getByText } = render(<Logo />);
+//   const linkElement = getByText(/Parameters/i);
+//   expect(linkElement).toBeInTheDocument();
+// });
 
 // test('Render EventLog', () => {
 //   const { getByText } = render(<EventLog />);

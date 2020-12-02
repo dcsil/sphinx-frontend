@@ -35,7 +35,6 @@ const itemStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     flexShrink: 0,
     height: '100%',
-    fontSize: 13,
   },
   column: {
     width: '50%',

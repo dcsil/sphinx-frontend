@@ -61,7 +61,7 @@ function Login({ login, requesting, isLoggedIn }) {
   }
 
   return (
-    <Flex width="full" mt="15%" align="center" justifyContent="center">
+    <Flex data-testid="login" width="full" mt="15%" align="center" justifyContent="center">
       <Box p={8} width="600px" maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
         <form onSubmit={handleSubmit(onSubmit)}>
           {renderForm()}

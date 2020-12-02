@@ -69,13 +69,13 @@ export default function InfoTable(props) {
             return (
               <TableRow key={key}>
                 <TableCell key={logs.id + key} component="th" scope="row">
-                  {PARAM[key].naming}
+                  {PARAM[key]?.naming}
                 </TableCell>
                 <TableCell key={logs.id + logs[key]} align="right">
                   {typeof logs[key] === 'number'
                     ? to3Decimal(logs[key], key).toString()
                     : logs[key].toString()}
-                  <span style={{ color: '#666', marginLeft: 5 }}>{PARAM[key].unit}</span>
+                  <span style={{ color: '#666', marginLeft: 5 }}>{PARAM[key]?.unit}</span>
                 </TableCell>
               </TableRow>
             );

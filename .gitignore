@@ -6,8 +6,9 @@
 .pnp.js
 
 # testing
-/coverage
 !/coverage/lcov.info
+/coverage
+
 
 # production
 /build

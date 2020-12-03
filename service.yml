@@ -10,7 +10,7 @@ docs:
     getting_started: ./README.md
 
 commands:
-    bootstrap: script/bootstrap
+    bootstrap: chmod 700 script/bootstrap; script/bootstrap
     database: ''
     server: npm run start
     test: npm run test

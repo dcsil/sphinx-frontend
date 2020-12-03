@@ -33,6 +33,6 @@ jobs:
     - run: npm install 
     - uses: paambaati/codeclimate-action@v2.7.4
       env:
-        CC_TEST_REPORTER_ID: d07d30979fec9b34a7fa184bb6818149fd41c088fcf0fa19805e5367541fef25
+        CC_TEST_REPORTER_ID: 1c4ba1b8b8b27e394b1e7e88f6bec9f6ea66276b29f0224e6354579339b28984
       with:
         coverageCommand: npm run coverage

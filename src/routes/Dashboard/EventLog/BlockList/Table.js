@@ -33,7 +33,7 @@ export default function FolderList(props) {
         let num = logs.length;
         let recent = Math.max(...logs.map(l => l.TimeStamp));
         return (
-          <div key={ip}>
+          <div key={i.toString()}>
             <ListItem>
               <ListItemText
                 primary={`Source IP: ${ip}`}

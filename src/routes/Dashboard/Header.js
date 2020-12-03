@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../components/Logo';
 import { auth } from '../../redux/actions/auth';
-import { traffic } from '../../redux/actions/traffic';
+// import { traffic } from '../../redux/actions/traffic';
 import { connect } from 'react-redux';
 import DataLoader from './DataLoader';
 import { Popover } from 'antd';
@@ -165,6 +165,5 @@ const Header = props => {
 
 const actionCreator = {
   logout: auth.logout,
-  random: traffic.random,
 };
 export default connect(null, actionCreator)(Header);

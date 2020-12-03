@@ -27,15 +27,16 @@ export default class HelperModal extends React.Component {
     });
   };
 
-  _onYouTubeReady(event) {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  }
+  // _onYouTubeReady(event) {
+  //   // access to player in all event handlers via event.target
+  //   event.target.pauseVideo();
+  // }
 
   render() {
     return (
       <>
         <Fab
+          type="fab"
           size="small"
           variant={'extended'}
           aria-label="question"

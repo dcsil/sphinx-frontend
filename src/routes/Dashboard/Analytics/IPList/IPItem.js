@@ -31,7 +31,7 @@ const itemStyles = makeStyles(theme => ({
     height: '100%',
   },
   secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
+    // fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
     flexShrink: 0,
     height: '100%',

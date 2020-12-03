@@ -24,12 +24,15 @@
     "chai": "^4.2.0",
     "chart.js": "^2.9.4",
     "emotion-theming": "^10.0.27",
+    "fetch-mock": "^9.11.0",
     "jest-canvas-mock": "^2.3.0",
     "mapbox-gl": "^1.13.0",
+    "node-fetch": "^2.6.1",
     "plotly.js": "^1.57.1",
     "randomcolor": "^0.6.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
+    "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.0",
     "react-hook-form": "^6.11.0",
     "react-icons": "^3.11.0",
@@ -43,13 +46,14 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "service-worker-mock": "^2.0.5",
     "victory": "^35.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
-    "coverage": "react-scripts test --watchAll=false --coverage --collectCoverageFrom=!src/routes/LandingPage/sa.svg --collectCoverageFrom=!src/routes/LandingPage/Logo.js --collectCoverageFrom=!src/utils/timeStamp.js --collectCoverageFrom=!src/utils/color.js --collectCoverageFrom=!src/serviceWorker.js --collectCoverageFrom=!src/index.js --collectCoverageFrom=!src/redux/reducers/*.js --collectCoverageFrom=!src/redux/actions/*.js --collectCoverageFrom=!src/components/IPTable.js --collectCoverageFrom=!src/components/BarChart.js --collectCoverageFrom=!src/components/PrivateComponent.js --collectCoverageFrom=!src/components/PrivateRoute.js --collectCoverageFrom=!src/components/SplitButton.js --collectCoverageFrom=!src/components/Navbar.js --collectCoverageFrom=!src/routes/Dashboard/**/*.js",
+    "coverage": "react-scripts test --watchAll=false --coverage --collectCoverageFrom=!src/serviceWorker.js",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -74,19 +78,13 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.3.2",
+    "enzyme": "^3.11.0",
     "husky": "^4.3.0",
     "nyc": "^15.1.0",
     "prettier": "^2.1.2",
-    "pretty-quick": "^3.1.0"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/src/redux/reducers/",
-      "!<rootDir>/src/redux/components/PrivateRoute.js",
-      "!<rootDir>/src/redux/components/SplitButton.js",
-      "!<rootDir>/src/route/Dashboard/",
-      "!<rootDir>/src/redux/components/Navbar.js"
-    ]
+    "pretty-quick": "^3.1.0",
+    "react-test-renderer": "^17.0.1",
+    "redux-mock-store": "^1.5.4"
   }
 }

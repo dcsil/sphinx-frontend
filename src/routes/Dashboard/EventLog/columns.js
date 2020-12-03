@@ -2,7 +2,7 @@ import { int2time } from '../../../utils/timeStamp';
 import { LABELS } from '../../../model/traffic';
 import { Tag } from 'antd';
 
-const to4Decimal = number => {
+export const to4Decimal = number => {
   return Math.round(number * 10000) / 10000;
 };
 

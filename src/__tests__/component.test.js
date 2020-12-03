@@ -8,6 +8,7 @@ import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 // so we can import fireEvent and screen here as well
 import { render, fireEvent, screen } from '../../test-utils';
 import Header from '../routes/Dashboard/Header';
+import { DropDown as HDrop, Control as HControl, HeaderButtoon } from '../routes/Dashboard/Header';
 import Login from '../routes/LoginPage';
 import Private from '../components/PrivateComponent';
 import Logo from '../routes/LandingPage/Logo';
@@ -26,12 +27,15 @@ import Control from '../routes/Dashboard/Cluster/control';
 import Packet from '../routes/Dashboard/Analytics/Diagrams/Packet';
 import AntTable from '../routes/Dashboard/EventLog/table';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import reducer from '../redux/reducers';
+import Line from '../routes/Dashboard/Analytics/Diagrams/Monitoring/LineChart';
 import Diagrams from '../routes/Dashboard/Analytics/Diagrams';
 import { shallow, mount } from 'enzyme';
-import Analytics from '../routes/Dashboard/Analytics'
-import Rstore from '../redux/store'
+import Analytics from '../routes/Dashboard/Analytics';
+import Rstore from '../redux/store';
+import Map from '../routes/Dashboard/Analytics/Diagrams/Map';
+import Cluster from '../routes/Dashboard/Cluster';
+import PCA from '../routes/Dashboard/Cluster/pca';
+import AppRoutes from '../routes';
 
 // Component Test
 var tList = [];
@@ -106,7 +110,7 @@ test('Render DropDown', () => {
   expect(screen).not.toBeUndefined();
 });
 
-test('Render DropDown', () => {
+test('Render Header', () => {
   render(
     <ThemeProvider>
       <CSSReset />
@@ -172,30 +176,36 @@ it('Render Pie', () => {
 });
 
 it('Render Monitoring', () => {
-  render(<Monitoring />, { initialState: { traffic: { logs: tList } } });
+  render(<Monitoring />, { initialState: { auth: {userToken: true}, traffic: { logs: tList } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render Packet', () => {
-  render(<Packet />, { initialState: { traffic: { logs: tList } } });
+  render(<Packet />, { initialState: { auth: {userToken: true}, traffic: { logs: tList } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render IpList - no block', () => {
-  render(<IPList />, { initialState: { traffic: { logs: tList, blockList: [] } } });
+  render(<IPList />, { initialState: { auth: {userToken: true}, traffic: { logs: tList, blockList: [] } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render IpList', () => {
   render(<IPList />, {
-    initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } },
+    initialState: {
+      auth: { userToken: true },
+      traffic: { logs: tList, blockList: [tList[0].SourceIP] },
+    },
   });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render BlockList', () => {
   render(<BlockList />, {
-    initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } },
+    initialState: {
+      auth: { userToken: true },
+      traffic: { logs: tList, blockList: [tList[0].SourceIP] },
+    },
   });
   expect(screen).not.toBeUndefined();
 });
@@ -232,6 +242,68 @@ it('renders with Analytics', () => {
 it('renders with Diagrams', () => {
   const wrapper = shallow(<Diagrams />); // Rendering
   expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with Line', () => {
+  const wrapper = render(<Line logs={tList} attribute={'Duration'} color={'#666666'} />); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with Cluster', () => {
+  const wrapper = render(<Cluster />, {
+    initialState: { traffic: { logs: [], blockList: [] } },
+  }); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with PCA', () => {
+  const wrapper = render(<PCA logs={[]} />); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with AppRoutes', () => {
+  const wrapper = render(
+    <ThemeProvider>
+      <CSSReset />
+      <AppRoutes />
+    </ThemeProvider>
+  ); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with HDrop', () => {
+  const wrapper = render(
+    <ThemeProvider>
+      <CSSReset />
+      <HDrop rate={1} onClickSlower={() => {}} onClickFaster={() => {}} />
+    </ThemeProvider>
+  ); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with HControl', () => {
+  const wrapper = render(
+    <ThemeProvider>
+      <CSSReset />
+      <HControl rate={1} />
+    </ThemeProvider>
+  ); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with HeaderButtoon', () => {
+  const wrapper = render(
+    <ThemeProvider>
+      <CSSReset />
+      <HeaderButtoon disabled={false} onClick={() => { }} />
+    </ThemeProvider>
+  ); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('Render Map', () => {
+  render(<Map />, { initialState: { auth: {userToken: true}, traffic: { logs: [], blockList: [] } } });
+  expect(screen).not.toBeUndefined();
 });
 
 // it('renders with EventLog', () => {

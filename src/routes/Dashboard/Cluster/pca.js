@@ -54,6 +54,7 @@ class Cluster extends React.Component {
 
   get_cluster = logs => {
     var that = this;
+    if (logs.length === 0) return;
     cluster(logs)
       .then(res => {
         var clustered = res.data.data;

@@ -53,7 +53,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
-    "coverage": "react-scripts test --watchAll=false --coverage --collectCoverageFrom=!src/serviceWorker.js",
+    "coverage": "react-scripts test --watchAll=false --coverage --collectCoverageFrom=!**/*.svg --collectCoverageFrom=!src/serviceWorker.js --collectCoverageFrom=!src/index.js",
     "eject": "react-scripts eject"
   },
   "husky": {

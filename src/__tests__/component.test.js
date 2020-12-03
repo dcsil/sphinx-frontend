@@ -176,17 +176,19 @@ it('Render Pie', () => {
 });
 
 it('Render Monitoring', () => {
-  render(<Monitoring />, { initialState: { auth: {userToken: true}, traffic: { logs: tList } } });
+  render(<Monitoring />, { initialState: { auth: { userToken: true }, traffic: { logs: tList } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render Packet', () => {
-  render(<Packet />, { initialState: { auth: {userToken: true}, traffic: { logs: tList } } });
+  render(<Packet />, { initialState: { auth: { userToken: true }, traffic: { logs: tList } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render IpList - no block', () => {
-  render(<IPList />, { initialState: { auth: {userToken: true}, traffic: { logs: tList, blockList: [] } } });
+  render(<IPList />, {
+    initialState: { auth: { userToken: true }, traffic: { logs: tList, blockList: [] } },
+  });
   expect(screen).not.toBeUndefined();
 });
 
@@ -295,75 +297,15 @@ it('renders with HeaderButtoon', () => {
   const wrapper = render(
     <ThemeProvider>
       <CSSReset />
-      <HeaderButtoon disabled={false} onClick={() => { }} />
+      <HeaderButtoon disabled={false} onClick={() => {}} />
     </ThemeProvider>
   ); // Rendering
   expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
 });
 
 it('Render Map', () => {
-  render(<Map />, { initialState: { auth: {userToken: true}, traffic: { logs: [], blockList: [] } } });
+  render(<Map />, {
+    initialState: { auth: { userToken: true }, traffic: { logs: [], blockList: [] } },
+  });
   expect(screen).not.toBeUndefined();
 });
-
-// it('renders with EventLog', () => {
-//   let store = createStore(
-//     reducer,
-//     { auth: { userToken: true }, traffic: { logs: tList, blockList: [tList[0].SourceIP] } },
-//     applyMiddleware(thunk)
-//   );
-//   function provider(props) {
-//     return <Provider store={store}>{props.children}</Provider>;
-//   }
-//   const wrapper = shallow(<EventLog />, {
-//     wrappingComponent: provider,
-//   });
-//   expect(wrapper).not.toBeUndefined();
-// });
-
-// it('Render Diagrams', () => {
-//   render(
-//     <Diagrams />
-//   );
-//   expect(screen).not.toBeUndefined();
-// });
-
-// it('Renders the connected EventLog', () => {
-//     render(
-//       <ThemeProvider>
-//         <CSSReset />
-//         <Router history={history}>
-//           <EventLog />
-//         </Router>
-//       </ThemeProvider>,
-//       { initialState: { traffic: { logs: [], blockList: [] } } }
-//     );
-//     expect(screen).not.toBeUndefined();
-//   });
-
-// test('renders login', async () => {
-//   const { getByText } = await render(
-//     <Provider store={store}>
-//       <ThemeProvider>
-//         <CSSReset />
-//         <Login />
-//       </ThemeProvider>
-//     </Provider>
-//   );
-//   const text1 = await waitForElement(() => getByText('Username or Email'));
-//   const text2 = await waitForElement(() => getByText('Password'));
-//   expect(text1).toBeInTheDocument();
-//   expect(text2).toBeInTheDocument();
-// });
-// it('Renders the connected PrivateComponent', () => {
-//   render(
-//     <ThemeProvider>
-//       <CSSReset />
-//       <Router history={history}>
-//         <Header path={'/dashboard/analytics'} />
-//       </Router>
-//     </ThemeProvider>,
-//     { logout: () => {} }
-//   );
-//   expect(screen).not.toBeUndefined();
-// });

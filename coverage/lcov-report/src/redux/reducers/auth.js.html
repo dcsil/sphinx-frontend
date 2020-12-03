@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,58 +88,58 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_OUT } from '../constant/actionTypes';
 &nbsp;
-const isUser = <span class="cstat-no" title="statement not covered" >localStorage.getItem('user');</span>
-const initialState = <span class="cstat-no" title="statement not covered" >isUser ? { userToken: isUser } : { userToken: null };</span>
+const isUser = localStorage.getItem('user');
+const initialState = isUser ? <span class="branch-0 cbranch-no" title="branch not covered" >{ userToken: isUser } </span>: { userToken: null };
 &nbsp;
-const auth = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>tate = <span class="branch-0 cbranch-no" title="branch not covered" >initialState,</span> action) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  switch (action.type) {</span>
+const auth = (state = initialState, action) =&gt; {
+  switch (action.type) {
     case LOGIN_REQUEST:
-<span class="cstat-no" title="statement not covered" >      return { requesting: true, error: null, isLoggedIn: false };</span>
+      return { requesting: true, error: null, isLoggedIn: false };
 &nbsp;
     case LOGIN_SUCCESS: {
-<span class="cstat-no" title="statement not covered" >      return { userToken: action.payload, requesting: false, isLoggedIn: true };</span>
+      return { userToken: action.payload, requesting: false, isLoggedIn: true };
     }
 &nbsp;
-    case LOGIN_FAILURE: {
+<span class="branch-2 cbranch-no" title="branch not covered" >    case LOGIN_FAILURE: {</span>
 <span class="cstat-no" title="statement not covered" >      return { error: action.payload, isLoggedIn: false };</span>
     }
 &nbsp;
     case LOGIN_OUT: {
-<span class="cstat-no" title="statement not covered" >      localStorage.removeItem('user');</span>
-<span class="cstat-no" title="statement not covered" >      return { userToken: null, isLoggedIn: false };</span>
+      localStorage.removeItem('user');
+      return { userToken: null, isLoggedIn: false };
     }
 &nbsp;
     default:
-<span class="cstat-no" title="statement not covered" >      return state;</span>
+      return state;
   }
 };
 &nbsp;
@@ -151,7 +151,7 @@ export default auth;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 02 2020 17:36:31 GMT-0500 (Eastern Standard Time)
+                at Wed Dec 02 2020 19:42:18 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

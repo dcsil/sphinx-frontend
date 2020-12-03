@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>10/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>10/12</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -182,33 +182,32 @@
 <a name='L123'></a><a href='#L123'>123</a>
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -217,7 +216,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,24 +316,24 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import Fab from '@material-ui/core/Fab';
 &nbsp;
 export default class HelperModal extends React.Component {
-  state = <span class="cstat-no" title="statement not covered" >{ visible: false };</span>
+  state = { visible: false };
 &nbsp;
-  showModal = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+  showModal = () =&gt; {
+    this.setState({
       visible: true,
     });
   };
 &nbsp;
-  handleOk = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >e </span>=&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    console.log(e);</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+  handleOk = e =&gt; {
+    console.log(e);
+    this.setState({
       visible: false,
     });
   };
 &nbsp;
-  handleCancel = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >e </span>=&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    console.log(e);</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+  handleCancel = e =&gt; {
+    console.log(e);
+    this.setState({
       visible: false,
     });
   };
@@ -341,22 +343,23 @@ export default class HelperModal extends React.Component {
   //   event.target.pauseVideo();
   // }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  re</span>nder() {
-<span class="cstat-no" title="statement not covered" >    return (</span>
+  render() {
+    return (
       &lt;&gt;
         &lt;Fab
+          type="fab"
           size="small"
           variant={'extended'}
           aria-label="question"
           color="primary"
-          style={{ margin: 10, backgroundColor: this.state.play ? '#666' : '#5c9dff' }}
+          style={{ margin: 10, backgroundColor: this.state.play ? <span class="branch-0 cbranch-no" title="branch not covered" >'#666' </span>: '#5c9dff' }}
           onClick={this.showModal.bind(this)}
           onMouseEnter={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >this.setState({ show_info: true })}</span>
           onMouseLeave={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >this.setState({ show_info: false })}</span>
         &gt;
           &lt;HelpOutlineIcon style={{ fontSize: 25 }} /&gt;
           &lt;p style={{ margin: 3, padding: 3, fontSize: 13 }}&gt;
-            {this.state.show_info ? 'What does this chart mean?' : 'Help'}
+            {this.state.show_info ? <span class="branch-0 cbranch-no" title="branch not covered" >'What does this chart mean?' </span>: 'Help'}
           &lt;/p&gt;
         &lt;/Fab&gt;
         &lt;Modal
@@ -439,7 +442,7 @@ export default class HelperModal extends React.Component {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 02 2020 17:36:31 GMT-0500 (Eastern Standard Time)
+                at Wed Dec 02 2020 19:42:18 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

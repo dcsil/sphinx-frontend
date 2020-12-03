@@ -7,6 +7,10 @@ import thunk from 'redux-thunk';
 
 // Import your own reducer
 import reducer from './src/redux/reducers'
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+Enzyme.configure({ adapter: new Adapter() });
+
 
 function render(
   ui,

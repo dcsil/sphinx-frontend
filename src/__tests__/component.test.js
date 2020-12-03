@@ -15,9 +15,8 @@ import Traffic, { LABELS } from '../model/traffic';
 import IPItem from '../routes/Dashboard/Analytics/IPList/IPItem';
 import IPList from '../routes/Dashboard/Analytics/IPList';
 import IPHeader from '../routes/Dashboard/Analytics/IPList/IPHeader';
-import Diagrams from '../routes/Dashboard/Analytics/Diagrams'
-import DropDown from '../routes/Dashboard/EventLog/dropDown';
 import Modal from '../routes/Dashboard/Cluster/modal';
+import DropDown from '../routes/Dashboard/EventLog/dropDown';
 import '@testing-library/jest-dom/extend-expect';
 import BlockList from '../routes/Dashboard/EventLog/BlockList';
 import Flow from '../routes/Dashboard/Analytics/Diagrams/Flow';
@@ -25,7 +24,14 @@ import Pie from '../routes/Dashboard/Analytics/Diagrams/Map/pie';
 import Monitoring from '../routes/Dashboard/Analytics/Diagrams/Monitoring';
 import Control from '../routes/Dashboard/Cluster/control';
 import Packet from '../routes/Dashboard/Analytics/Diagrams/Packet';
-
+import AntTable from '../routes/Dashboard/EventLog/table';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import reducer from '../redux/reducers';
+import Diagrams from '../routes/Dashboard/Analytics/Diagrams';
+import { shallow, mount } from 'enzyme';
+import Analytics from '../routes/Dashboard/Analytics'
+import Rstore from '../redux/store'
 
 // Component Test
 var tList = [];
@@ -166,45 +172,82 @@ it('Render Pie', () => {
 });
 
 it('Render Monitoring', () => {
-  render(
-    <Monitoring />,
-    { initialState: { traffic: { logs: tList } } }
-  );
+  render(<Monitoring />, { initialState: { traffic: { logs: tList } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render Packet', () => {
-  render(
-    <Packet />,
-    { initialState: { traffic: { logs: tList } } }
-  );
+  render(<Packet />, { initialState: { traffic: { logs: tList } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render IpList - no block', () => {
-  render(
-    <IPList />,
-    { initialState: { traffic: { logs: tList, blockList: [] } } }
-  );
+  render(<IPList />, { initialState: { traffic: { logs: tList, blockList: [] } } });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render IpList', () => {
-  render(
-    <IPList />,
-    { initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } } }
-  );
+  render(<IPList />, {
+    initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } },
+  });
   expect(screen).not.toBeUndefined();
 });
 
 it('Render BlockList', () => {
-  render(
-    <BlockList />,
-    { initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } } }
-  );
+  render(<BlockList />, {
+    initialState: { traffic: { logs: tList, blockList: [tList[0].SourceIP] } },
+  });
   expect(screen).not.toBeUndefined();
 });
 
+// import Enzyme from 'enzyme';
+// import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+// Enzyme.configure({ adapter: new Adapter() });
+// import { shallow } from 'enzyme';
+it('renders with AntTable', () => {
+  const wrapper = shallow(
+    <Provider store={Rstore}>
+      <AntTable data={tList} />
+    </Provider>
+  ); // Rendering
+  expect(wrapper).not.toBeUndefined();
+});
+
+it('renders with Modal', () => {
+  const wrapper = shallow(<Modal />); // Rendering
+  expect(wrapper.state('visible')).toBe(false); // The type of the Result component is success
+  // The type of the Result component is success
+  wrapper.instance().showModal();
+  expect(wrapper.state('visible')).toBe(true); // The type of the Result component is success
+  wrapper.instance().handleOk();
+  wrapper.instance().showModal();
+  wrapper.instance().handleCancel();
+});
+
+it('renders with Analytics', () => {
+  const wrapper = shallow(<Analytics />); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+it('renders with Diagrams', () => {
+  const wrapper = shallow(<Diagrams />); // Rendering
+  expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
+});
+
+// it('renders with EventLog', () => {
+//   let store = createStore(
+//     reducer,
+//     { auth: { userToken: true }, traffic: { logs: tList, blockList: [tList[0].SourceIP] } },
+//     applyMiddleware(thunk)
+//   );
+//   function provider(props) {
+//     return <Provider store={store}>{props.children}</Provider>;
+//   }
+//   const wrapper = shallow(<EventLog />, {
+//     wrappingComponent: provider,
+//   });
+//   expect(wrapper).not.toBeUndefined();
+// });
 
 // it('Render Diagrams', () => {
 //   render(

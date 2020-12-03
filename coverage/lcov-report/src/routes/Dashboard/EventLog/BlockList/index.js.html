@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -117,21 +117,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,16 +142,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,15 +169,15 @@ import { traffic } from '../../../../redux/actions/traffic.js';
 import BlockOutlinedIcon from '@material-ui/icons/BlockOutlined';
 import Count from '../../../../components/Counting';
 &nbsp;
-const useStyles = <span class="cstat-no" title="statement not covered" >makeStyles(<span class="fstat-no" title="function not covered" >th</span>eme =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+const useStyles = makeStyles(theme =&gt; ({
   root: {
     width: '100%',
   },
 }));
 &nbsp;
-const BlockList = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> blockList, blockLogs, remove_block }) =&gt; {</span>
-  const classes = <span class="cstat-no" title="statement not covered" >useStyles();</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
+const BlockList = ({ blockList, blockLogs, remove_block }) =&gt; {
+  const classes = useStyles();
+  return (
     &lt;Count&gt;
       &lt;span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}&gt;
         &lt;BlockOutlinedIcon style={{ marginRight: 10 }} /&gt; IP Block List{' '}
@@ -199,17 +199,17 @@ const BlockList = <span class="cstat-no" title="statement not covered" ><span cl
   );
 };
 &nbsp;
-function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps) {
-<span class="cstat-no" title="statement not covered" >  return {</span>
+function mapStateToProps(state, ownProps) {
+  return {
     // traffic: state.traffic,
     // malicious: state.traffic.logs.filter(t =&gt; t.label === LABELS.MALICIOUS),
     blockList: state.traffic.blockList,
     blockLogs: state.traffic.logs.filter(
-<span class="fstat-no" title="function not covered" >      t </span>=&gt; <span class="cstat-no" title="statement not covered" >state.traffic.blockList.findIndex(<span class="fstat-no" title="function not covered" >b </span>=&gt; <span class="cstat-no" title="statement not covered" >b === t.SourceIP)</span> &gt; -1</span>
+      t =&gt; state.traffic.blockList.findIndex(b =&gt; b === t.SourceIP) &gt; -1
     ),
   };
 }
-const actions = <span class="cstat-no" title="statement not covered" >{</span>
+const actions = {
   remove_block: traffic.blocklist_remove,
 };
 export default connect(mapStateToProps, actions)(BlockList);
@@ -220,7 +220,7 @@ export default connect(mapStateToProps, actions)(BlockList);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 02 2020 17:36:31 GMT-0500 (Eastern Standard Time)
+                at Wed Dec 02 2020 19:42:18 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../../../../prettify.js"></script>

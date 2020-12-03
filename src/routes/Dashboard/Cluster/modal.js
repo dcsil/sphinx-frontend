@@ -36,6 +36,7 @@ export default class HelperModal extends React.Component {
     return (
       <>
         <Fab
+          type="fab"
           size="small"
           variant={'extended'}
           aria-label="question"

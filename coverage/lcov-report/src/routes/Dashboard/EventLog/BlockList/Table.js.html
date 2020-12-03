@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>10/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">77.78% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -151,7 +151,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,15 +165,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">401x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,7 +233,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { int2time } from '../../../../utils/timeStamp';
 import Typography from '@material-ui/core/Typography';
 &nbsp;
-const useStyles = <span class="cstat-no" title="statement not covered" >makeStyles(<span class="fstat-no" title="function not covered" >th</span>eme =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+const useStyles = makeStyles(theme =&gt; ({
   root: {
     width: '100%',
     maxWidth: 360,
@@ -246,16 +246,16 @@ const useStyles = <span class="cstat-no" title="statement not covered" >makeStyl
   },
 }));
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >FolderList(</span>props) {
-  const classes = <span class="cstat-no" title="statement not covered" >useStyles();</span>
+export default function FolderList(props) {
+  const classes = useStyles();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;List className={classes.root} key={Math.random()}&gt;
-      {props.blockList.map(<span class="fstat-no" title="function not covered" >(i</span>p, i) =&gt; {
-        let logs = <span class="cstat-no" title="statement not covered" >props.blockLogs.filter(<span class="fstat-no" title="function not covered" >l </span>=&gt; <span class="cstat-no" title="statement not covered" >l.SourceIP === ip)</span>;</span>
-        let num = <span class="cstat-no" title="statement not covered" >logs.length;</span>
-        let recent = <span class="cstat-no" title="statement not covered" >Math.max(...logs.map(<span class="fstat-no" title="function not covered" >l </span>=&gt; <span class="cstat-no" title="statement not covered" >l.TimeStamp)</span>);</span>
-<span class="cstat-no" title="statement not covered" >        return (</span>
+      {props.blockList.map((ip, i) =&gt; {
+        let logs = props.blockLogs.filter(l =&gt; l.SourceIP === ip);
+        let num = logs.length;
+        let recent = Math.max(...logs.map(l =&gt; l.TimeStamp));
+        return (
           &lt;div key={i.toString()}&gt;
             &lt;ListItem&gt;
               &lt;ListItemText
@@ -310,7 +310,7 @@ export default function <span class="fstat-no" title="function not covered" >Fol
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 02 2020 17:36:31 GMT-0500 (Eastern Standard Time)
+                at Wed Dec 02 2020 19:42:18 GMT-0500 (Eastern Standard Time)
             </div>
         </div>
         <script src="../../../../../prettify.js"></script>

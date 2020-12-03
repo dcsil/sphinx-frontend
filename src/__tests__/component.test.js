@@ -302,10 +302,3 @@ it('renders with HeaderButtoon', () => {
   ); // Rendering
   expect(wrapper).not.toBeUndefined(); // The type of the Result component is success
 });
-
-it('Render Map', () => {
-  render(<Map />, {
-    initialState: { auth: { userToken: true }, traffic: { logs: [], blockList: [] } },
-  });
-  expect(screen).not.toBeUndefined();
-});

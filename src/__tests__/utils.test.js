@@ -1,6 +1,7 @@
 import { getColorForPercentage } from '../utils/color';
 import * as time from '../utils/timeStamp';
 import Traffic from '../model/traffic';
+import { COLUMN, to4Decimal } from '../routes/Dashboard/EventLog/columns';
 
 describe('Test utils/', () => {
   it('test utils/color', async () => {
@@ -37,5 +38,14 @@ describe('Test utils/', () => {
     expect(par_data.length).toEqual(2);
     par_data = time.getData([], 'Duration', 2, 20);
     expect(par_data.length).toEqual(2);
+  });
+
+  it('test utils/color', () => {
+    var dec = to4Decimal(123);
+    expect(dec).toBe(123);
+    for (var C in COLUMN) {
+      let obj = COLUMN[C];
+      expect(typeof obj.dataIndex).toBe('string');
+    }
   });
 });

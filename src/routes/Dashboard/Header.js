@@ -27,7 +27,7 @@ const MenuItems = props => {
   );
 };
 
-const DropDown = props => {
+export const DropDown = props => {
   const [show, setShow] = React.useState(false);
   return (
     <div>
@@ -55,7 +55,7 @@ const DropDown = props => {
   );
 };
 
-const Control = props => {
+export const Control = props => {
   const [saved, setSaved] = React.useState(999 * 999);
   return (
     <HeaderButtoon
@@ -69,7 +69,7 @@ const Control = props => {
   );
 };
 
-const HeaderButtoon = props => {
+export const HeaderButtoon = props => {
   return (
     <Button
       size="sm"

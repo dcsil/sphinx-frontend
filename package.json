@@ -19,7 +19,7 @@
     "@testing-library/user-event": "^7.1.2",
     "@urbica/react-map-gl": "^1.14.2",
     "antd": "^4.8.6",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "chai": "^4.2.0",
     "chart.js": "^2.9.4",

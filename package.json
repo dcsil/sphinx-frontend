@@ -27,7 +27,7 @@
     "fetch-mock": "^9.11.0",
     "jest-canvas-mock": "^2.3.0",
     "mapbox-gl": "^1.13.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "plotly.js": "^1.57.1",
     "randomcolor": "^0.6.2",
     "react": "^17.0.1",
